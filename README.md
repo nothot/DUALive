@@ -1,2 +1,2 @@
 # DUALive
-live your life！
+just live your life！
