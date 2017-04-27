@@ -9,16 +9,26 @@
 #import "DUAVideoCapture.h"
 #import <UIKit/UIKit.h>
 
+@interface DUAVideoCapture ()
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@end
+
 @implementation DUAVideoCapture
 
 - (void)startVideoCapture
 {
-    
+    self.timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1.0/24 target:self selector:@selector(fetchScreenshot) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 - (void)stopVideoCapture
 {
-    
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 
@@ -36,6 +46,7 @@
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
+    NSLog(@"=== screenshot");
     return image;
 }
 
@@ -69,7 +80,7 @@
     CGContextRelease(context);
     
     CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
-    
+    NSLog(@"=== transform");
     return pxbuffer;
 }
 

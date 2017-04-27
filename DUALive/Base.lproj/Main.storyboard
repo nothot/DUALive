@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +21,51 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrU-5H-qOb">
+                                <rect key="frame" x="76" y="497" width="60" height="40"/>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="onStartClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VAn-C2-Vy7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Vn-cV-Eic">
+                                <rect key="frame" x="239" y="497" width="60" height="40"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="onStopClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="USF-I6-s6i"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhc-n0-ZBL">
+                                <rect key="frame" x="157.5" y="313.5" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WhB-We-zQ5"/>
+                                    <constraint firstAttribute="width" constant="60" id="tbj-li-0jF"/>
+                                </constraints>
+                                <state key="normal" title="color"/>
+                                <connections>
+                                    <action selector="onColorClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eIN-qm-TUd"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UrU-5H-qOb" secondAttribute="bottom" constant="130" id="ALH-Gu-ADg"/>
+                            <constraint firstItem="vhc-n0-ZBL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Iz3-4u-KaW"/>
+                            <constraint firstItem="UrU-5H-qOb" firstAttribute="height" secondItem="vhc-n0-ZBL" secondAttribute="height" id="L49-GO-p62"/>
+                            <constraint firstItem="9Vn-cV-Eic" firstAttribute="centerY" secondItem="UrU-5H-qOb" secondAttribute="centerY" id="YVt-RW-l4h"/>
+                            <constraint firstItem="UrU-5H-qOb" firstAttribute="width" secondItem="vhc-n0-ZBL" secondAttribute="width" id="eg6-2E-Boy"/>
+                            <constraint firstItem="9Vn-cV-Eic" firstAttribute="width" secondItem="vhc-n0-ZBL" secondAttribute="width" id="lcy-Z1-8DD"/>
+                            <constraint firstItem="vhc-n0-ZBL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pPg-6B-ZI3"/>
+                            <constraint firstItem="9Vn-cV-Eic" firstAttribute="height" secondItem="vhc-n0-ZBL" secondAttribute="height" id="rL3-V2-AHu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Vn-cV-Eic" secondAttribute="trailing" constant="60" id="udW-sF-PDR"/>
+                            <constraint firstItem="UrU-5H-qOb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="ykA-5d-b04"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="116" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>

@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)onStartClick:(id)sender;
+- (IBAction)onStopClick:(id)sender;
+- (IBAction)onColorClick:(id)sender;
 
 @end
 

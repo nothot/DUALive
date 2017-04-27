@@ -10,4 +10,7 @@
 
 @interface DUAAudioCapture : NSObject
 
+- (void)startAudioCapture;
+- (void)stopAudioCapture;
+
 @end
