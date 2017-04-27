@@ -12,24 +12,26 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) NSMutableArray *colorArray;
+
 @end
 
 @implementation ViewController
 
 DUAVideoCapture *videoCapture;
+DUAAudioCapture *audioCapture;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-//    DUAAudioCapture *capture = [DUAAudioCapture new];
-//    [capture startAudioCapture];
-//    
-//    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, (int64_t)5*NSEC_PER_SEC);
-//    dispatch_after(time, dispatch_get_main_queue(), ^ {
-//        [capture stopAudioCapture];
-//    });
     
     videoCapture = [DUAVideoCapture new];
+    audioCapture = [DUAAudioCapture new];
+    self.colorArray = [NSMutableArray arrayWithObjects:[UIColor orangeColor],
+                       [UIColor redColor],
+                       [UIColor yellowColor],
+                       [UIColor greenColor],
+                       [UIColor purpleColor],
+                       nil];
 }
 
 
@@ -42,16 +44,23 @@ DUAVideoCapture *videoCapture;
 - (IBAction)onStartClick:(id)sender
 {
     [videoCapture startVideoCapture];
+    //[audioCapture startAudioCapture];
 }
 
 - (IBAction)onStopClick:(id)sender
 {
     [videoCapture stopVideoCapture];
+    //[audioCapture stopAudioCapture];
 }
 
 - (IBAction)onColorClick:(id)sender
 {
-    
+    static int i = 0;
+    self.view.backgroundColor = (UIColor *)[self.colorArray objectAtIndex:i];
+    i++;
+    if (i == self.colorArray.count) {
+        i = 0;
+    }
 }
 
 @end

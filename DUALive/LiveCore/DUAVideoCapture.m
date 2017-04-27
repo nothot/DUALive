@@ -19,7 +19,7 @@
 
 - (void)startVideoCapture
 {
-    self.timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1.0/24 target:self selector:@selector(fetchScreenshot) userInfo:nil repeats:YES];
+    self.timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1.0/24 target:self selector:@selector(test) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
@@ -82,6 +82,11 @@
     CVPixelBufferUnlockBaseAddress(pxbuffer, 0);
     NSLog(@"=== transform");
     return pxbuffer;
+}
+
+- (void)test
+{
+    [self pixcelBufferFromCGImage:[self fetchScreenshot].CGImage];
 }
 
 @end
