@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D726907A1EB82E6600FEED53 /* DUAQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D72690791EB82E6600FEED53 /* DUAQueue.m */; };
 		D7691A991EB0864B00FC4C84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A981EB0864B00FC4C84 /* main.m */; };
 		D7691A9C1EB0864B00FC4C84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A9B1EB0864B00FC4C84 /* AppDelegate.m */; };
 		D7691A9F1EB0864B00FC4C84 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A9E1EB0864B00FC4C84 /* ViewController.m */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D72690781EB82E6600FEED53 /* DUAQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUAQueue.h; sourceTree = "<group>"; };
+		D72690791EB82E6600FEED53 /* DUAQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUAQueue.m; sourceTree = "<group>"; };
 		D7691A941EB0864B00FC4C84 /* DUALive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUALive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7691A981EB0864B00FC4C84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D7691A9A1EB0864B00FC4C84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -48,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D72690771EB82E3A00FEED53 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D72690781EB82E6600FEED53 /* DUAQueue.h */,
+				D72690791EB82E6600FEED53 /* DUAQueue.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		D7691A8B1EB0864B00FC4C84 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +104,7 @@
 		D7691AAE1EB086FB00FC4C84 /* LiveCore */ = {
 			isa = PBXGroup;
 			children = (
+				D72690771EB82E3A00FEED53 /* Utils */,
 				D7691AAF1EB0875000FC4C84 /* Capture */,
 			);
 			path = LiveCore;
@@ -141,6 +154,7 @@
 				TargetAttributes = {
 					D7691A931EB0864B00FC4C84 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = G7ZDN2AJQH;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -182,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7691AB71EB08A1300FC4C84 /* DUAAudioCapture.m in Sources */,
+				D726907A1EB82E6600FEED53 /* DUAQueue.m in Sources */,
 				D7691A9F1EB0864B00FC4C84 /* ViewController.m in Sources */,
 				D7691ABB1EB08D4C00FC4C84 /* DUAAVCaptureManager.m in Sources */,
 				D7691AB41EB089FF00FC4C84 /* DUAVideoCapture.m in Sources */,
@@ -307,13 +322,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
+				PROVISIONING_PROFILE_SPECIFIER = sdktest;
 			};
 			name = Debug;
 		};
@@ -322,13 +337,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
+				PROVISIONING_PROFILE_SPECIFIER = sdktest;
 			};
 			name = Release;
 		};

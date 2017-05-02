@@ -10,4 +10,7 @@
 
 @interface DUAAVCaptureManager : NSObject
 
+- (void)startLive;
+- (void)stopLive;
+
 @end

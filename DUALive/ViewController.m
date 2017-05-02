@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "DUAAudioCapture.h"
 #import "DUAVideoCapture.h"
+#import <MediaPlayer/MediaPlayerDefines.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface ViewController ()
 
@@ -26,7 +29,8 @@ DUAAudioCapture *audioCapture;
     
     videoCapture = [DUAVideoCapture new];
     audioCapture = [DUAAudioCapture new];
-    self.colorArray = [NSMutableArray arrayWithObjects:[UIColor orangeColor],
+    self.colorArray = [NSMutableArray arrayWithObjects:
+                       [UIColor orangeColor],
                        [UIColor redColor],
                        [UIColor yellowColor],
                        [UIColor greenColor],
@@ -49,7 +53,18 @@ DUAAudioCapture *audioCapture;
 
 - (IBAction)onStopClick:(id)sender
 {
-    [videoCapture stopVideoCapture];
+    [videoCapture stopVideoCapture:^ (NSString *videoPath){
+//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+//        [library writeVideoAtPathToSavedPhotosAlbum:[NSURL fileURLWithPath:videoPath]
+//                                    completionBlock:^(NSURL *assetURL, NSError *error) {
+//                                        if (error) {
+//                                            NSLog(@"Save video failed:%@",error);
+//                                        } else {
+//                                            NSLog(@"Save video succeed.");
+//                                        }
+//                                    }];
+
+    }];
     //[audioCapture stopAudioCapture];
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "DUAAudioCapture.h"
-#import <AVFoundation/AVFoundation.h>
 
 @interface DUAAudioCapture () <AVCaptureAudioDataOutputSampleBufferDelegate>
 
@@ -52,7 +51,10 @@
 #pragma mark --AVCaptureAudioDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    NSLog(@"=== audio output ");
+    NSLog(@"===> audio output ");
+    if (self.delegate) {
+        [self.delegate audioCaptureOutput:sampleBuffer];
+    }
 }
 
 @end
