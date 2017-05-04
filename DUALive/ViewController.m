@@ -7,28 +7,21 @@
 //
 
 #import "ViewController.h"
-#import "DUAAudioCapture.h"
-#import "DUAVideoCapture.h"
-#import <MediaPlayer/MediaPlayerDefines.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+#import "DUAAVCaptureManager.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
+@property (nonatomic, strong) DUAAVCaptureManager *avCaptureManager;
 
 @end
 
 @implementation ViewController
 
-DUAVideoCapture *videoCapture;
-DUAAudioCapture *audioCapture;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    videoCapture = [DUAVideoCapture new];
-    audioCapture = [DUAAudioCapture new];
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor orangeColor],
                        [UIColor redColor],
@@ -36,6 +29,7 @@ DUAAudioCapture *audioCapture;
                        [UIColor greenColor],
                        [UIColor purpleColor],
                        nil];
+    
 }
 
 
@@ -47,25 +41,20 @@ DUAAudioCapture *audioCapture;
 
 - (IBAction)onStartClick:(id)sender
 {
-    [videoCapture startVideoCapture];
-    //[audioCapture startAudioCapture];
+    AWVideoConfig *videoConfig = [[AWVideoConfig alloc] init];
+    videoConfig.fps = 25;
+    AWAudioConfig *audioConfig = [[AWAudioConfig alloc] init];
+    audioConfig.sampleRate = 48000;
+    
+    //获取推流地址rtmpUrl
+    NSString *rtmpUrl = @"";
+    self.avCaptureManager = [[DUAAVCaptureManager alloc] initWithVideoConfig:videoConfig AudioConfig:audioConfig RtmpUrl:rtmpUrl];
+    [self.avCaptureManager startLive];
 }
 
 - (IBAction)onStopClick:(id)sender
 {
-    [videoCapture stopVideoCapture:^ (NSString *videoPath){
-//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//        [library writeVideoAtPathToSavedPhotosAlbum:[NSURL fileURLWithPath:videoPath]
-//                                    completionBlock:^(NSURL *assetURL, NSError *error) {
-//                                        if (error) {
-//                                            NSLog(@"Save video failed:%@",error);
-//                                        } else {
-//                                            NSLog(@"Save video succeed.");
-//                                        }
-//                                    }];
-
-    }];
-    //[audioCapture stopAudioCapture];
+    [self.avCaptureManager stopLive];
 }
 
 - (IBAction)onColorClick:(id)sender
