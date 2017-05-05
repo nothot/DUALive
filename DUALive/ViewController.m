@@ -47,7 +47,7 @@
     audioConfig.sampleRate = 48000;
     
     //获取推流地址rtmpUrl
-    NSString *rtmpUrl = @"";
+    NSString *rtmpUrl = @"rtmp://rtmp-api.facebook.com:80/rtmp/423192058058423?ds=1&s_l=1&a=AThLXHWDnrVdf9Bp";
     self.avCaptureManager = [[DUAAVCaptureManager alloc] initWithVideoConfig:videoConfig AudioConfig:audioConfig RtmpUrl:rtmpUrl];
     [self.avCaptureManager startLive];
 }
@@ -66,5 +66,6 @@
         i = 0;
     }
 }
+
 
 @end

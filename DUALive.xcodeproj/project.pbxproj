@@ -479,6 +479,7 @@
 				D7691A901EB0864B00FC4C84 /* Sources */,
 				D7691A911EB0864B00FC4C84 /* Frameworks */,
 				D7691A921EB0864B00FC4C84 /* Resources */,
+				D7A917A61EBC106E001CB36C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -535,6 +536,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D7A917A61EBC106E001CB36C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D7691A901EB0864B00FC4C84 /* Sources */ = {
@@ -691,6 +708,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -713,6 +731,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

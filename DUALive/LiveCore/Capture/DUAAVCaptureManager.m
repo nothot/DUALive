@@ -70,11 +70,11 @@ void rtmp_state_changed_callback (aw_rtmp_state state_from, aw_rtmp_state state_
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
         [self.encoderManager openWithAudioConfig:self.audioConfig videoConfig:self.videoConfig];
-        int isSuccess = aw_streamer_open(self.rtmpUrl.UTF8String, rtmp_state_changed_callback);
-        if (isSuccess) {
+        //int isSuccess = aw_streamer_open(self.rtmpUrl.UTF8String, rtmp_state_changed_callback);
+        //if (isSuccess) {
             [self.videoCapture startVideoCapture];
             [self.audioCapture startAudioCapture];
-        }
+        //}
     });
     
 }
@@ -91,16 +91,40 @@ void rtmp_state_changed_callback (aw_rtmp_state state_from, aw_rtmp_state state_
     });
 }
 
+- (void)sendVideoPixelBuffer:(CVPixelBufferRef)pixcelBuffer
+{
+    //CFRetain(pixcelBuffer);
+    dispatch_async(self.encodeBufferQueue, ^ {
+        [self.encoderManager.videoEncoder encodePixelBufferToFlvTag:pixcelBuffer];
+        //[weakSelf sendFlvVideoTag:video_tag toSendQueue:sendQueue];
+        //
+    });
+    //CFRelease(pixcelBuffer);
+}
+
+- (void)sendAudioSampleBuffer:(CMSampleBufferRef)sampleBuffer
+{
+    CFRetain(sampleBuffer);
+    dispatch_async(self.encodeBufferQueue, ^ {
+        [self.encoderManager.audioEncoder encodeAudioSampleBufToFlvTag:sampleBuffer];
+        CFRelease(sampleBuffer);
+    });
+}
+
 #pragma mark -- DUAVideoCaptureDelegate and DUAAudioCaptureDelegate
 
 - (void)videoCaptureOutput:(CVPixelBufferRef)pixcelBuffer
 {
     NSLog(@"===> test video");
+    if (pixcelBuffer) {
+        [self sendVideoPixelBuffer:pixcelBuffer];
+    }
 }
 
 - (void)audioCaptureOutput:(CMSampleBufferRef)sampleBuffer
 {
     NSLog(@"===> test audio");
+    
 }
 
 @end

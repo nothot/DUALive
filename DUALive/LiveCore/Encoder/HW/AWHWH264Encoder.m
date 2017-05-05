@@ -26,12 +26,9 @@
     return _vSemaphore;
 }
 
--(aw_flv_video_tag *)encodeYUVDataToFlvTag:(NSData *)yuvData{
-    if (!_vEnSession) {
-        return NULL;
-    }
+- (CVPixelBufferRef)convertYuvDataToPixelBuffer:(NSData *)yuvData
+{
     //yuv 变成 转CVPixelBufferRef
-    OSStatus status = noErr;
     
     //视频宽度
     size_t pixelWidth = self.videoConfig.pushStreamWidth;
@@ -61,6 +58,16 @@
     uint8_t *uv_frame = CVPixelBufferGetBaseAddressOfPlane(pixelBuf, 1);
     memcpy(uv_frame, yuv_frame + y_size, uv_size * 2);
     
+    return pixelBuf;
+}
+
+- (aw_flv_video_tag *)encodePixelBufferToFlvTag:(CVPixelBufferRef)pixelBuf
+{
+    if (!_vEnSession) {
+        return NULL;
+    }
+    
+    OSStatus status = noErr;
     //硬编码 CmSampleBufRef
     
     //时间戳
@@ -104,6 +111,12 @@
     CFRelease(pixelBuf);
     
     return NULL;
+
+}
+
+-(aw_flv_video_tag *)encodeYUVDataToFlvTag:(NSData *)yuvData{
+    CVPixelBufferRef pixcelBuf = [self convertYuvDataToPixelBuffer:yuvData];
+    return [self encodePixelBufferToFlvTag:pixcelBuf];
 }
 
 -(aw_flv_video_tag *)createSpsPpsFlvTag{

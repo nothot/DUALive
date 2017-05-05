@@ -22,6 +22,10 @@
 
 -(aw_flv_video_tag *) encodeVideoSampleBufToFlvTag:(CMSampleBufferRef)videoSample;
 
+- (aw_flv_video_tag *)encodeVideoPixelBufferToFlvTag:(CVPixelBufferRef)pixelBuffer;
+
+- (aw_flv_video_tag *)encodePixelBufferToFlvTag:(CVPixelBufferRef)pixelBuf;
+
 //根据flv，h264，aac协议，提供首帧需要发送的tag
 //创建sps pps
 -(aw_flv_video_tag *) createSpsPpsFlvTag;

@@ -57,6 +57,21 @@
     return [self encodeYUVDataToFlvTag:[self convertVideoSmapleBufferToYuvData:videoSample]];
 }
 
+// add 如果不是从摄像头获取的图像帧，则类型并不是CMSampleBufferRef，故增加CVPixelBufferRef转换
+- (aw_flv_video_tag *)encodeVideoPixelBufferToFlvTag:(CVPixelBufferRef)pixelBuffer
+{
+    NSLog(@"=================================================================");
+    if (!pixelBuffer) {
+        NSLog(@"error!!!!!!!!!!!");
+        return NULL;
+    }
+//    if ([@"AWHWH264Encoder" isEqualToString:NSStringFromClass(self)]) {
+//        return [self encodeVideoPixelBufferToFlvTag:pixelBuffer];
+//    }
+    return [self encodeYUVDataToFlvTag:[self convertVideoPixcelBufferToYuvData:pixelBuffer]];
+    //return [self encodePixelBufferToFlvTag:pixelBuffer];
+}
+
 -(aw_flv_video_tag *)createSpsPpsFlvTag{
     return NULL;
 }
@@ -66,7 +81,13 @@
     // 通过CMSampleBufferGetImageBuffer方法，获得CVImageBufferRef。
     // 这里面就包含了yuv420数据的指针
     CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(videoSample);
+    return [self convertVideoPixcelBufferToYuvData:pixelBuffer];
     
+}
+
+// add
+- (NSData *)convertVideoPixcelBufferToYuvData:(CVPixelBufferRef)pixelBuffer
+{
     //表示开始操作数据
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
     

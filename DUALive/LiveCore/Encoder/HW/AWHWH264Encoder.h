@@ -11,5 +11,5 @@
 #import "AWVideoEncoder.h"
 
 @interface AWHWH264Encoder : AWVideoEncoder
-
+- (aw_flv_video_tag *)encodePixelBufferToFlvTag:(CVPixelBufferRef)pixelBuf;
 @end
