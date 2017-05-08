@@ -17,8 +17,9 @@
 @interface DUAVideoCapture : NSObject
 
 @property (nonatomic, weak) id<DUAVideoCaptureDelegate> delegate;
+@property (nonatomic, assign) BOOL isRunning;
 
-- (void)startVideoCapture;
-- (void)stopVideoCapture;
+//- (void)startVideoCapture;
+//- (void)stopVideoCapture;
 
 @end

@@ -9,25 +9,25 @@
 #import "DUAAVCaptureManager.h"
 #import "DUAVideoCapture.h"
 #import "DUAAudioCapture.h"
+#import "LFHardwareAudioEncoder.h"
+#import "LFHardwareVideoEncoder.h"
 
-__weak static DUAAVCaptureManager *weekAVCaptureManager;
-void rtmp_state_changed_callback (aw_rtmp_state state_from, aw_rtmp_state state_to)
-{
-    NSLog(@"rtmp state changed from(%s), to(%s)", aw_rtmp_state_description(state_from), aw_rtmp_state_description(state_to));
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (weekAVCaptureManager.stateDelegate) {
-            [weekAVCaptureManager.stateDelegate rtmpStateChangedFrom:state_from To:state_to];
-        }
-    });
-}
+/**  时间戳 */
+#define NOW (CACurrentMediaTime()*1000)
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
-@interface DUAAVCaptureManager () <DUAVideoCaptureDelegate, DUAAudioCaptureDelegate>
+@interface DUAAVCaptureManager () <DUAVideoCaptureDelegate, DUAAudioCaptureDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate>
 
 @property (nonatomic, strong) DUAVideoCapture *videoCapture;
 @property (nonatomic, strong) DUAAudioCapture *audioCapture;
-@property (nonatomic, strong) AWEncoderManager *encoderManager;
-@property (nonatomic, strong) dispatch_queue_t encodeBufferQueue;
-@property (nonatomic, strong) dispatch_queue_t sendBufferQueue;
+/// 音频编码
+@property (nonatomic, strong) id<LFAudioEncoding> audioEncoder;
+/// 视频编码
+@property (nonatomic, strong) id<LFVideoEncoding> videoEncoder;
+/// 音频配置
+@property (nonatomic, strong) LFLiveAudioConfiguration *audioConfiguration;
+/// 视频配置
+@property (nonatomic, strong) LFLiveVideoConfiguration *videoConfiguration;
 
 @end
 @implementation DUAAVCaptureManager
@@ -37,30 +37,20 @@ void rtmp_state_changed_callback (aw_rtmp_state state_from, aw_rtmp_state state_
     @throw [NSException exceptionWithName:@"please call initWithVideoConfig:AudioConfig:RtmpUrl to init" reason:nil userInfo:nil];
 }
 
-- (instancetype)initWithVideoConfig:(AWVideoConfig *)videoConfig
-                        AudioConfig:(AWAudioConfig *)audioConfig
-                            RtmpUrl:(NSString *)rtmpUrl
+- (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration rmptUrl:(NSString *)urlString
 {
     if (self = [super init]) {
+        self.audioConfiguration = audioConfiguration;
+        self.videoConfiguration = videoConfiguration;
         self.videoCapture = [[DUAVideoCapture alloc] init];
         self.audioCapture = [[DUAAudioCapture alloc] init];
+        self.audioEncoder = [[LFHardwareAudioEncoder alloc] initWithAudioStreamConfiguration:audioConfiguration];
+        self.videoEncoder = [[LFHardwareVideoEncoder alloc] initWithVideoStreamConfiguration:videoConfiguration];
+        
         self.videoCapture.delegate = self;
         self.audioCapture.delegate = self;
-        self.encodeBufferQueue = dispatch_queue_create("dua.encode.buffer.queue", NULL);
-        self.sendBufferQueue = dispatch_queue_create("dua.send.buffer.queue", NULL);
-        weekAVCaptureManager = self;
-        
-        self.videoConfig = videoConfig;
-        self.audioConfig = audioConfig;
-        self.encoderManager = [[AWEncoderManager alloc] init];
-        self.encoderManager.videoEncoderType = AWVideoEncoderTypeHWH264;
-        self.encoderManager.audioEncoderType = AWAudioEncoderTypeHWAACLC;
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8) {
-            self.encoderManager.videoEncoderType = AWVideoEncoderTypeSWX264;
-            self.encoderManager.audioEncoderType = AWAudioEncoderTypeSWFAAC;
-        }
-        
-        self.rtmpUrl = rtmpUrl;
+        [self.audioEncoder setDelegate:self];
+        [self.videoEncoder setDelegate:self];
     }
     
     return self;
@@ -68,63 +58,70 @@ void rtmp_state_changed_callback (aw_rtmp_state state_from, aw_rtmp_state state_
 
 - (void)startLive
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-        [self.encoderManager openWithAudioConfig:self.audioConfig videoConfig:self.videoConfig];
-        //int isSuccess = aw_streamer_open(self.rtmpUrl.UTF8String, rtmp_state_changed_callback);
-        //if (isSuccess) {
-            [self.videoCapture startVideoCapture];
-            [self.audioCapture startAudioCapture];
-        //}
-    });
+    
+    self.videoCapture.isRunning = YES;
+    [self.audioCapture startAudioCapture];
     
 }
 
 - (void)stopLive
 {
-    [self.videoCapture stopVideoCapture];
+    self.videoCapture.isRunning = NO;
     [self.audioCapture stopAudioCapture];
-    dispatch_sync(self.sendBufferQueue, ^{
-        aw_streamer_close();
-    });
-    dispatch_sync(self.encodeBufferQueue, ^{
-        [self.encoderManager close];
-    });
+//    dispatch_sync(self.sendBufferQueue, ^{
+//        aw_streamer_close();
+//    });
+//    dispatch_sync(self.encodeBufferQueue, ^{
+//        [self.encoderManager close];
+//    });
 }
 
-- (void)sendVideoPixelBuffer:(CVPixelBufferRef)pixcelBuffer
-{
-    //CFRetain(pixcelBuffer);
-    dispatch_async(self.encodeBufferQueue, ^ {
-        [self.encoderManager.videoEncoder encodePixelBufferToFlvTag:pixcelBuffer];
-        //[weakSelf sendFlvVideoTag:video_tag toSendQueue:sendQueue];
-        //
-    });
-    //CFRelease(pixcelBuffer);
-}
+//- (void)sendVideoPixelBuffer:(CVPixelBufferRef)pixcelBuffer
+//{
+//    CFRetain(pixcelBuffer);
+//    dispatch_async(self.encodeBufferQueue, ^ {
+//        [self.encoderManager.videoEncoder encodePixelBufferToFlvTag:pixcelBuffer];
+//        //[weakSelf sendFlvVideoTag:video_tag toSendQueue:sendQueue];
+//        //
+//    });
+//    CFRelease(pixcelBuffer);
+//}
+//
+//- (void)sendAudioSampleBuffer:(CMSampleBufferRef)sampleBuffer
+//{
+//    CFRetain(sampleBuffer);
+//    dispatch_async(self.encodeBufferQueue, ^ {
+//        [self.encoderManager.audioEncoder encodeAudioSampleBufToFlvTag:sampleBuffer];
+//        CFRelease(sampleBuffer);
+//    });
+//}
 
-- (void)sendAudioSampleBuffer:(CMSampleBufferRef)sampleBuffer
-{
-    CFRetain(sampleBuffer);
-    dispatch_async(self.encodeBufferQueue, ^ {
-        [self.encoderManager.audioEncoder encodeAudioSampleBufToFlvTag:sampleBuffer];
-        CFRelease(sampleBuffer);
-    });
-}
-
-#pragma mark -- DUAVideoCaptureDelegate and DUAAudioCaptureDelegate
+#pragma mark -- DUAVideoCaptureDelegate && DUAAudioCaptureDelegate && LFAudioEncodingDelegate && LFVideoEncodingDelegate
 
 - (void)videoCaptureOutput:(CVPixelBufferRef)pixcelBuffer
 {
-    NSLog(@"===> test video");
-    if (pixcelBuffer) {
-        [self sendVideoPixelBuffer:pixcelBuffer];
-    }
+    NSLog(@"===> test video output");
+    [self.videoEncoder encodeVideoData:pixcelBuffer timeStamp:NOW];
 }
 
 - (void)audioCaptureOutput:(CMSampleBufferRef)sampleBuffer
 {
-    NSLog(@"===> test audio");
+    NSLog(@"===> test audio output");
+    NSData *audioData;
     
+    //to do
+    [self.audioEncoder encodeAudioData:audioData timeStamp:NOW];
+}
+
+- (void)audioEncoder:(nullable id<LFAudioEncoding>)encoder audioFrame:(nullable LFAudioFrame *)frame
+{
+    NSLog(@"===> test audio encode");
+    
+}
+
+- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame
+{
+    NSLog(@"===> test video encode");
 }
 
 @end

@@ -10,37 +10,79 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DUAQueue.h"
 
-static const int frameRate = 25;
+static const int frameRate = 20;
 
 @interface DUAVideoCapture ()
 
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) dispatch_source_t timer;
 @property (nonatomic, assign) NSInteger frameCount;
-@property (nonatomic, strong) DUAQueue *frameQueue;
+@property (nonatomic, strong) DUAQueue *frameBufferQueue;
+@property (nonatomic, strong) dispatch_queue_t screenshotQueue;
+@property (nonatomic, strong) dispatch_queue_t fetchFrameQueue;
+
 
 @end
 @implementation DUAVideoCapture
-dispatch_source_t timer;
+
 
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.frameQueue = [[DUAQueue alloc] init];
+        self.frameBufferQueue = [[DUAQueue alloc] init];
+        self.screenshotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
+        self.fetchFrameQueue = dispatch_queue_create("dua.fetchframe.queue", NULL);
+        self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.screenshotQueue);
+        dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(self.timer, ^{
+            [self fetchScreenshot];
+        });
     }
     
     return self;
 }
 
-- (void)startVideoCapture
+- (void)setIsRunning:(BOOL)isRunning
 {
-    dispatch_queue_t screenshotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
-    timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, screenshotQueue);
-    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(timer, ^{
-        [self fetchScreenshot];
-    });
-    dispatch_resume(timer);
+    _isRunning = isRunning;
     
+    if (_isRunning) {
+        dispatch_resume(self.timer);
+        
+        dispatch_async(self.fetchFrameQueue, ^ {
+            while (self.timer || (!self.timer && [self.frameBufferQueue deQueue])) {
+                @autoreleasepool {
+                    UIImage *object = [self.frameBufferQueue deQueue];
+                    if (object) {
+                        CGImageRef objectImage = object.CGImage;
+                        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
+                        if (self.delegate) {
+                            [self.delegate videoCaptureOutput:pixcelBuffer];
+                        }
+                        CVPixelBufferRelease(pixcelBuffer);
+                    }
+                }
+            }
+        });
+        
+    }else {
+        dispatch_sync(self.screenshotQueue, ^{
+            dispatch_source_cancel(self.timer);
+            self.timer = nil;
+        });
+
+    }
+}
+
+//- (void)startVideoCapture
+//{
+//    dispatch_queue_t screenshotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
+//    timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, screenshotQueue);
+//    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+//    dispatch_source_set_event_handler(timer, ^{
+//        [self fetchScreenshot];
+//    });
+//    dispatch_resume(timer);
+//    
 //    dispatch_queue_t fetchQueue = dispatch_queue_create("dua.fetchframe.queue", NULL);;
 //    dispatch_async(fetchQueue, ^ {
 //        while (timer || (!timer && [self.frameQueue deQueue])) {
@@ -57,15 +99,15 @@ dispatch_source_t timer;
 //            }
 //        }
 //    });
-}
-
-- (void)stopVideoCapture
-{
-    if (timer) {
-        dispatch_source_cancel(timer);
-        timer = nil;
-    }
-}
+//}
+//
+//- (void)stopVideoCapture
+//{
+//    if (timer) {
+//        dispatch_source_cancel(timer);
+//        timer = nil;
+//    }
+//}
 
 
 #pragma mark -- private logic
@@ -85,17 +127,17 @@ dispatch_source_t timer;
         UIGraphicsEndImageContext();
     }
     NSLog(@"===> fetch frame %d", frameCount);
-    [self.frameQueue enQueue:image];
+    [self.frameBufferQueue enQueue:image];
 
-    UIImage *object = [self.frameQueue deQueue];
-    if (object) {
-        CGImageRef objectImage = object.CGImage;
-        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-        if (self.delegate) {
-            [self.delegate videoCaptureOutput:pixcelBuffer];
-        }
-        CVPixelBufferRelease(pixcelBuffer);
-    }
+//    UIImage *object = [self.frameQueue deQueue];
+//    if (object) {
+//        CGImageRef objectImage = image.CGImage;
+//        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
+//        if (self.delegate) {
+//            [self.delegate videoCaptureOutput:pixcelBuffer];
+//        }
+//        CVPixelBufferRelease(pixcelBuffer);
+//    }
 }
 
 - (CVPixelBufferRef)pixcelBufferFromCGImage:(CGImageRef)image
