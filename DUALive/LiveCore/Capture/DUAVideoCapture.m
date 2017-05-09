@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DUAQueue.h"
 
-static const int frameRate = 20;
+static const int frameRate = 25;
 
 @interface DUAVideoCapture ()
 
@@ -55,7 +55,7 @@ static const int frameRate = 20;
                     if (object) {
                         CGImageRef objectImage = object.CGImage;
                         CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-                        if (self.delegate) {
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
                             [self.delegate videoCaptureOutput:pixcelBuffer];
                         }
                         CVPixelBufferRelease(pixcelBuffer);
@@ -72,42 +72,6 @@ static const int frameRate = 20;
 
     }
 }
-
-//- (void)startVideoCapture
-//{
-//    dispatch_queue_t screenshotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
-//    timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, screenshotQueue);
-//    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-//    dispatch_source_set_event_handler(timer, ^{
-//        [self fetchScreenshot];
-//    });
-//    dispatch_resume(timer);
-//    
-//    dispatch_queue_t fetchQueue = dispatch_queue_create("dua.fetchframe.queue", NULL);;
-//    dispatch_async(fetchQueue, ^ {
-//        while (timer || (!timer && [self.frameQueue deQueue])) {
-//            @autoreleasepool {
-//                UIImage *object = [self.frameQueue deQueue];
-//                if (object) {
-//                    CGImageRef objectImage = object.CGImage;
-//                    CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-//                    if (self.delegate) {
-//                        [self.delegate videoCaptureOutput:pixcelBuffer];
-//                    }
-//                    CVPixelBufferRelease(pixcelBuffer);
-//                }
-//            }
-//        }
-//    });
-//}
-//
-//- (void)stopVideoCapture
-//{
-//    if (timer) {
-//        dispatch_source_cancel(timer);
-//        timer = nil;
-//    }
-//}
 
 
 #pragma mark -- private logic

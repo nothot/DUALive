@@ -17,18 +17,28 @@
 @end
 @implementation DUAAudioCapture
 
-- (void)startAudioCapture
+- (instancetype)init
 {
-    [self audioCaptureInit];
-    [self.captureSession startRunning];
+    if (self = [super init]) {
+        [self audioCaptureInit];
+    }
+    
+    return self;
 }
 
-- (void)stopAudioCapture
+- (void)setIsRunning:(BOOL)isRunning
 {
-    if (self.captureSession && [self.captureSession isRunning]) {
-        [self.captureSession stopRunning];
+    _isRunning = isRunning;
+    
+    if (_isRunning) {
+        [self.captureSession startRunning];
+    }else {
+        if (self.captureSession && [self.captureSession isRunning]) {
+            [self.captureSession stopRunning];
+        }
     }
 }
+
 
 - (void)audioCaptureInit
 {
@@ -51,7 +61,7 @@
 #pragma mark --AVCaptureAudioDataOutputSampleBufferDelegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    if (self.delegate) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(audioCaptureOutput:)]) {
         [self.delegate audioCaptureOutput:sampleBuffer];
     }
 }

@@ -9,10 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "LFLiveAudioConfiguration.h"
 #import "LFLiveVideoConfiguration.h"
+#import "LFStreamSocket.h"
 
+@class DUALiveManager;
+@protocol DUALiveDelegate <NSObject>
 
-@interface DUAAVCaptureManager : NSObject
+@optional
+- (void)liveManager:(DUALiveManager *)manager liveState:(LFLiveState)state;
+- (void)liveManager:(DUALiveManager *)manager liveErrorCode:(LFLiveSocketErrorCode)errorCode;
+- (void)liveManager:(DUALiveManager *)manager liveDebugInfo:(LFLiveDebug *)debugInfo;
 
+@end
+
+@interface DUALiveManager : NSObject
+
+@property (nonatomic, weak) id<DUALiveDelegate> liveDelegate;
 
 - (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration rmptUrl:(NSString *)urlString;
 - (void)startLive;

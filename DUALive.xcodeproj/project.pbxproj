@@ -8,15 +8,77 @@
 
 /* Begin PBXBuildFile section */
 		D7236D031EB9CEE1005B4698 /* DUAAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFB1EB9CEE1005B4698 /* DUAAudioCapture.m */; };
-		D7236D041EB9CEE1005B4698 /* DUAAVCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFD1EB9CEE1005B4698 /* DUAAVCaptureManager.m */; };
+		D7236D041EB9CEE1005B4698 /* DUALiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFD1EB9CEE1005B4698 /* DUALiveManager.m */; };
 		D7236D051EB9CEE1005B4698 /* DUAVideoCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFF1EB9CEE1005B4698 /* DUAVideoCapture.m */; };
+		D751FBE41EC173A800874515 /* LFStreamingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBDE1EC173A800874515 /* LFStreamingBuffer.m */; };
+		D751FBE51EC173A800874515 /* LFStreamRtmpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE01EC173A800874515 /* LFStreamRtmpSocket.m */; };
+		D751FBE61EC173A800874515 /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE31EC173A800874515 /* NSMutableArray+LFAdd.m */; };
+		D751FBF81EC173B800874515 /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE81EC173B800874515 /* amf.c */; };
+		D751FBF91EC173B800874515 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBED1EC173B800874515 /* error.c */; };
+		D751FBFA1EC173B800874515 /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF01EC173B800874515 /* hashswf.c */; };
+		D751FBFB1EC173B800874515 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF21EC173B800874515 /* log.c */; };
+		D751FBFC1EC173B800874515 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF41EC173B800874515 /* parseurl.c */; };
+		D751FBFD1EC173B800874515 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF51EC173B800874515 /* rtmp.c */; };
+		D751FC0B1EC1B16600874515 /* DUALive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D751FC041EC1B16600874515 /* DUALive.framework */; };
+		D751FC0C1EC1B16600874515 /* DUALive.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D751FC041EC1B16600874515 /* DUALive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D751FC111EC1B1DC00874515 /* LFStreamingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBDE1EC173A800874515 /* LFStreamingBuffer.m */; };
+		D751FC121EC1B1DC00874515 /* LFStreamRtmpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE01EC173A800874515 /* LFStreamRtmpSocket.m */; };
+		D751FC131EC1B1DC00874515 /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE31EC173A800874515 /* NSMutableArray+LFAdd.m */; };
+		D751FC141EC1B1DC00874515 /* LFLiveAudioConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86661EC03EAA00449473 /* LFLiveAudioConfiguration.m */; };
+		D751FC151EC1B1DC00874515 /* LFLiveVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86681EC03EAA00449473 /* LFLiveVideoConfiguration.m */; };
+		D751FC161EC1B1DC00874515 /* DUAQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86531EC03E6000449473 /* DUAQueue.m */; };
+		D751FC171EC1B1DC00874515 /* LFAudioFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86551EC03E6000449473 /* LFAudioFrame.m */; };
+		D751FC181EC1B1DC00874515 /* LFFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86571EC03E6000449473 /* LFFrame.m */; };
+		D751FC191EC1B1DC00874515 /* LFLiveDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86591EC03E6000449473 /* LFLiveDebug.m */; };
+		D751FC1A1EC1B1DC00874515 /* LFLiveStreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E865B1EC03E6000449473 /* LFLiveStreamInfo.m */; };
+		D751FC1B1EC1B1DC00874515 /* LFVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E865D1EC03E6000449473 /* LFVideoFrame.m */; };
+		D751FC1C1EC1B1DC00874515 /* LFHardwareAudioEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */; };
+		D751FC1D1EC1B1DC00874515 /* LFHardwareVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86391EC03D9300449473 /* LFHardwareVideoEncoder.m */; };
+		D751FC1E1EC1B1DC00874515 /* DUAAudioCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFB1EB9CEE1005B4698 /* DUAAudioCapture.m */; };
+		D751FC1F1EC1B1DC00874515 /* DUALiveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFD1EB9CEE1005B4698 /* DUALiveManager.m */; };
+		D751FC201EC1B1DC00874515 /* DUAVideoCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D7236CFF1EB9CEE1005B4698 /* DUAVideoCapture.m */; };
+		D751FC211EC1B1DC00874515 /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE81EC173B800874515 /* amf.c */; };
+		D751FC221EC1B1DC00874515 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBED1EC173B800874515 /* error.c */; };
+		D751FC231EC1B1DC00874515 /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF01EC173B800874515 /* hashswf.c */; };
+		D751FC241EC1B1DC00874515 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF21EC173B800874515 /* log.c */; };
+		D751FC251EC1B1DC00874515 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF41EC173B800874515 /* parseurl.c */; };
+		D751FC261EC1B1DC00874515 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF51EC173B800874515 /* rtmp.c */; };
+		D751FC2C1EC1B2BE00874515 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D751FC2A1EC1B2BE00874515 /* Info.plist */; };
+		D751FC2D1EC1B43E00874515 /* LFStreamingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBDD1EC173A800874515 /* LFStreamingBuffer.h */; };
+		D751FC2E1EC1B43E00874515 /* LFStreamRTMPSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBDF1EC173A800874515 /* LFStreamRTMPSocket.h */; };
+		D751FC2F1EC1B43E00874515 /* LFStreamSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBE11EC173A800874515 /* LFStreamSocket.h */; };
+		D751FC301EC1B43E00874515 /* NSMutableArray+LFAdd.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBE21EC173A800874515 /* NSMutableArray+LFAdd.h */; };
+		D751FC311EC1B43E00874515 /* LFLiveAudioConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86651EC03EAA00449473 /* LFLiveAudioConfiguration.h */; };
+		D751FC321EC1B43E00874515 /* LFLiveVideoConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86671EC03EAA00449473 /* LFLiveVideoConfiguration.h */; };
+		D751FC331EC1B43E00874515 /* DUAQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86521EC03E6000449473 /* DUAQueue.h */; };
+		D751FC341EC1B43E00874515 /* LFAudioFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86541EC03E6000449473 /* LFAudioFrame.h */; };
+		D751FC351EC1B43E00874515 /* LFFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86561EC03E6000449473 /* LFFrame.h */; };
+		D751FC361EC1B43E00874515 /* LFLiveDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86581EC03E6000449473 /* LFLiveDebug.h */; };
+		D751FC371EC1B43E00874515 /* LFLiveStreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E865A1EC03E6000449473 /* LFLiveStreamInfo.h */; };
+		D751FC381EC1B43E00874515 /* LFVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E865C1EC03E6000449473 /* LFVideoFrame.h */; };
+		D751FC391EC1B43E00874515 /* LFAudioEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86331EC03D9300449473 /* LFAudioEncoding.h */; };
+		D751FC3A1EC1B43E00874515 /* LFHardwareAudioEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86361EC03D9300449473 /* LFHardwareAudioEncoder.h */; };
+		D751FC3B1EC1B43E00874515 /* LFHardwareVideoEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E86381EC03D9300449473 /* LFHardwareVideoEncoder.h */; };
+		D751FC3C1EC1B43E00874515 /* LFVideoEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = D78E863A1EC03D9300449473 /* LFVideoEncoding.h */; };
+		D751FC3D1EC1B43E00874515 /* DUAAudioCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = D7236CFA1EB9CEE1005B4698 /* DUAAudioCapture.h */; };
+		D751FC3E1EC1B43E00874515 /* DUALiveManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D7236CFC1EB9CEE1005B4698 /* DUALiveManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D751FC3F1EC1B43E00874515 /* DUAVideoCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = D7236CFE1EB9CEE1005B4698 /* DUAVideoCapture.h */; };
+		D751FC401EC1B43E00874515 /* amf.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBE91EC173B800874515 /* amf.h */; };
+		D751FC411EC1B43E00874515 /* bytes.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBEA1EC173B800874515 /* bytes.h */; };
+		D751FC421EC1B43E00874515 /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBEB1EC173B800874515 /* dh.h */; };
+		D751FC431EC1B43E00874515 /* dhgroups.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBEC1EC173B800874515 /* dhgroups.h */; };
+		D751FC441EC1B43E00874515 /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBEE1EC173B800874515 /* error.h */; };
+		D751FC451EC1B43E00874515 /* handshake.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBEF1EC173B800874515 /* handshake.h */; };
+		D751FC461EC1B43E00874515 /* http.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBF11EC173B800874515 /* http.h */; };
+		D751FC471EC1B43E00874515 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBF31EC173B800874515 /* log.h */; };
+		D751FC481EC1B43E00874515 /* rtmp.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBF61EC173B800874515 /* rtmp.h */; };
+		D751FC491EC1B43E00874515 /* rtmp_sys.h in Headers */ = {isa = PBXBuildFile; fileRef = D751FBF71EC173B800874515 /* rtmp_sys.h */; };
 		D7691A991EB0864B00FC4C84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A981EB0864B00FC4C84 /* main.m */; };
 		D7691A9C1EB0864B00FC4C84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A9B1EB0864B00FC4C84 /* AppDelegate.m */; };
 		D7691A9F1EB0864B00FC4C84 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A9E1EB0864B00FC4C84 /* ViewController.m */; };
 		D7691AA21EB0864B00FC4C84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA01EB0864B00FC4C84 /* Main.storyboard */; };
 		D7691AA41EB0864C00FC4C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA31EB0864C00FC4C84 /* Assets.xcassets */; };
 		D7691AA71EB0864C00FC4C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA51EB0864C00FC4C84 /* LaunchScreen.storyboard */; };
-		D78E863F1EC03D9300449473 /* LFH264VideoEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = D78E86351EC03D9300449473 /* LFH264VideoEncoder.mm */; };
 		D78E86401EC03D9300449473 /* LFHardwareAudioEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */; };
 		D78E86411EC03D9300449473 /* LFHardwareVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86391EC03D9300449473 /* LFHardwareVideoEncoder.m */; };
 		D78E865E1EC03E6000449473 /* DUAQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86531EC03E6000449473 /* DUAQueue.m */; };
@@ -27,21 +89,65 @@
 		D78E86631EC03E6000449473 /* LFVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E865D1EC03E6000449473 /* LFVideoFrame.m */; };
 		D78E86691EC03EAA00449473 /* LFLiveAudioConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86661EC03EAA00449473 /* LFLiveAudioConfiguration.m */; };
 		D78E866A1EC03EAA00449473 /* LFLiveVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86681EC03EAA00449473 /* LFLiveVideoConfiguration.m */; };
-		D78E86741EC0412E00449473 /* LFAVEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = D78E866D1EC0412E00449473 /* LFAVEncoder.mm */; };
-		D78E86751EC0412E00449473 /* LFMP4Atom.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E866F1EC0412E00449473 /* LFMP4Atom.m */; };
-		D78E86761EC0412E00449473 /* LFNALUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D78E86701EC0412E00449473 /* LFNALUnit.cpp */; };
-		D78E86771EC0412E00449473 /* LFVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86731EC0412E00449473 /* LFVideoEncoder.m */; };
-		D7A917AC1EBC7F30001CB36C /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A917AB1EBC7F30001CB36C /* ReplayKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D751FC091EC1B16600874515 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7691A8C1EB0864B00FC4C84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D751FC031EC1B16600874515;
+			remoteInfo = DUALive;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D751FC101EC1B16600874515 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D751FC0C1EC1B16600874515 /* DUALive.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D7236CFA1EB9CEE1005B4698 /* DUAAudioCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUAAudioCapture.h; sourceTree = "<group>"; };
 		D7236CFB1EB9CEE1005B4698 /* DUAAudioCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUAAudioCapture.m; sourceTree = "<group>"; };
-		D7236CFC1EB9CEE1005B4698 /* DUAAVCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUAAVCaptureManager.h; sourceTree = "<group>"; };
-		D7236CFD1EB9CEE1005B4698 /* DUAAVCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUAAVCaptureManager.m; sourceTree = "<group>"; };
+		D7236CFC1EB9CEE1005B4698 /* DUALiveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUALiveManager.h; sourceTree = "<group>"; };
+		D7236CFD1EB9CEE1005B4698 /* DUALiveManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUALiveManager.m; sourceTree = "<group>"; };
 		D7236CFE1EB9CEE1005B4698 /* DUAVideoCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUAVideoCapture.h; sourceTree = "<group>"; };
 		D7236CFF1EB9CEE1005B4698 /* DUAVideoCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DUAVideoCapture.m; sourceTree = "<group>"; };
-		D7691A941EB0864B00FC4C84 /* DUALive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUALive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D751FBDD1EC173A800874515 /* LFStreamingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFStreamingBuffer.h; sourceTree = "<group>"; };
+		D751FBDE1EC173A800874515 /* LFStreamingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFStreamingBuffer.m; sourceTree = "<group>"; };
+		D751FBDF1EC173A800874515 /* LFStreamRTMPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFStreamRTMPSocket.h; sourceTree = "<group>"; };
+		D751FBE01EC173A800874515 /* LFStreamRtmpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFStreamRtmpSocket.m; sourceTree = "<group>"; };
+		D751FBE11EC173A800874515 /* LFStreamSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFStreamSocket.h; sourceTree = "<group>"; };
+		D751FBE21EC173A800874515 /* NSMutableArray+LFAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+LFAdd.h"; sourceTree = "<group>"; };
+		D751FBE31EC173A800874515 /* NSMutableArray+LFAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+LFAdd.m"; sourceTree = "<group>"; };
+		D751FBE81EC173B800874515 /* amf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amf.c; sourceTree = "<group>"; };
+		D751FBE91EC173B800874515 /* amf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amf.h; sourceTree = "<group>"; };
+		D751FBEA1EC173B800874515 /* bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bytes.h; sourceTree = "<group>"; };
+		D751FBEB1EC173B800874515 /* dh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dh.h; sourceTree = "<group>"; };
+		D751FBEC1EC173B800874515 /* dhgroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dhgroups.h; sourceTree = "<group>"; };
+		D751FBED1EC173B800874515 /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = error.c; sourceTree = "<group>"; };
+		D751FBEE1EC173B800874515 /* error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		D751FBEF1EC173B800874515 /* handshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = handshake.h; sourceTree = "<group>"; };
+		D751FBF01EC173B800874515 /* hashswf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashswf.c; sourceTree = "<group>"; };
+		D751FBF11EC173B800874515 /* http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
+		D751FBF21EC173B800874515 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
+		D751FBF31EC173B800874515 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		D751FBF41EC173B800874515 /* parseurl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parseurl.c; sourceTree = "<group>"; };
+		D751FBF51EC173B800874515 /* rtmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtmp.c; sourceTree = "<group>"; };
+		D751FBF61EC173B800874515 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
+		D751FBF71EC173B800874515 /* rtmp_sys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp_sys.h; sourceTree = "<group>"; };
+		D751FC041EC1B16600874515 /* DUALive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DUALive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D751FC2A1EC1B2BE00874515 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7691A941EB0864B00FC4C84 /* DUALiveDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUALiveDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7691A981EB0864B00FC4C84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D7691A9A1EB0864B00FC4C84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D7691A9B1EB0864B00FC4C84 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -52,8 +158,6 @@
 		D7691AA61EB0864C00FC4C84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7691AA81EB0864C00FC4C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D78E86331EC03D9300449473 /* LFAudioEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAudioEncoding.h; sourceTree = "<group>"; };
-		D78E86341EC03D9300449473 /* LFH264VideoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFH264VideoEncoder.h; sourceTree = "<group>"; };
-		D78E86351EC03D9300449473 /* LFH264VideoEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LFH264VideoEncoder.mm; sourceTree = "<group>"; };
 		D78E86361EC03D9300449473 /* LFHardwareAudioEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHardwareAudioEncoder.h; sourceTree = "<group>"; };
 		D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFHardwareAudioEncoder.m; sourceTree = "<group>"; };
 		D78E86381EC03D9300449473 /* LFHardwareVideoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHardwareVideoEncoder.h; sourceTree = "<group>"; };
@@ -75,23 +179,21 @@
 		D78E86661EC03EAA00449473 /* LFLiveAudioConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLiveAudioConfiguration.m; sourceTree = "<group>"; };
 		D78E86671EC03EAA00449473 /* LFLiveVideoConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFLiveVideoConfiguration.h; sourceTree = "<group>"; };
 		D78E86681EC03EAA00449473 /* LFLiveVideoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLiveVideoConfiguration.m; sourceTree = "<group>"; };
-		D78E866C1EC0412E00449473 /* LFAVEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAVEncoder.h; sourceTree = "<group>"; };
-		D78E866D1EC0412E00449473 /* LFAVEncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LFAVEncoder.mm; sourceTree = "<group>"; };
-		D78E866E1EC0412E00449473 /* LFMP4Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFMP4Atom.h; sourceTree = "<group>"; };
-		D78E866F1EC0412E00449473 /* LFMP4Atom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFMP4Atom.m; sourceTree = "<group>"; };
-		D78E86701EC0412E00449473 /* LFNALUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LFNALUnit.cpp; sourceTree = "<group>"; };
-		D78E86711EC0412E00449473 /* LFNALUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFNALUnit.h; sourceTree = "<group>"; };
-		D78E86721EC0412E00449473 /* LFVideoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFVideoEncoder.h; sourceTree = "<group>"; };
-		D78E86731EC0412E00449473 /* LFVideoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFVideoEncoder.m; sourceTree = "<group>"; };
-		D7A917AB1EBC7F30001CB36C /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D751FC001EC1B16600874515 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7691A911EB0864B00FC4C84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7A917AC1EBC7F30001CB36C /* ReplayKit.framework in Frameworks */,
+				D751FC0B1EC1B16600874515 /* DUALive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,27 +205,75 @@
 			children = (
 				D7236CFA1EB9CEE1005B4698 /* DUAAudioCapture.h */,
 				D7236CFB1EB9CEE1005B4698 /* DUAAudioCapture.m */,
-				D7236CFC1EB9CEE1005B4698 /* DUAAVCaptureManager.h */,
-				D7236CFD1EB9CEE1005B4698 /* DUAAVCaptureManager.m */,
+				D7236CFC1EB9CEE1005B4698 /* DUALiveManager.h */,
+				D7236CFD1EB9CEE1005B4698 /* DUALiveManager.m */,
 				D7236CFE1EB9CEE1005B4698 /* DUAVideoCapture.h */,
 				D7236CFF1EB9CEE1005B4698 /* DUAVideoCapture.m */,
 			);
 			path = Capture;
 			sourceTree = "<group>";
 		};
+		D751FBDC1EC173A800874515 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				D751FBDD1EC173A800874515 /* LFStreamingBuffer.h */,
+				D751FBDE1EC173A800874515 /* LFStreamingBuffer.m */,
+				D751FBDF1EC173A800874515 /* LFStreamRTMPSocket.h */,
+				D751FBE01EC173A800874515 /* LFStreamRtmpSocket.m */,
+				D751FBE11EC173A800874515 /* LFStreamSocket.h */,
+				D751FBE21EC173A800874515 /* NSMutableArray+LFAdd.h */,
+				D751FBE31EC173A800874515 /* NSMutableArray+LFAdd.m */,
+			);
+			path = Push;
+			sourceTree = "<group>";
+		};
+		D751FBE71EC173B800874515 /* pili-librtmp */ = {
+			isa = PBXGroup;
+			children = (
+				D751FBE81EC173B800874515 /* amf.c */,
+				D751FBE91EC173B800874515 /* amf.h */,
+				D751FBEA1EC173B800874515 /* bytes.h */,
+				D751FBEB1EC173B800874515 /* dh.h */,
+				D751FBEC1EC173B800874515 /* dhgroups.h */,
+				D751FBED1EC173B800874515 /* error.c */,
+				D751FBEE1EC173B800874515 /* error.h */,
+				D751FBEF1EC173B800874515 /* handshake.h */,
+				D751FBF01EC173B800874515 /* hashswf.c */,
+				D751FBF11EC173B800874515 /* http.h */,
+				D751FBF21EC173B800874515 /* log.c */,
+				D751FBF31EC173B800874515 /* log.h */,
+				D751FBF41EC173B800874515 /* parseurl.c */,
+				D751FBF51EC173B800874515 /* rtmp.c */,
+				D751FBF61EC173B800874515 /* rtmp.h */,
+				D751FBF71EC173B800874515 /* rtmp_sys.h */,
+			);
+			name = "pili-librtmp";
+			path = "LiveCore/pili-librtmp";
+			sourceTree = "<group>";
+		};
+		D751FC281EC1B2BE00874515 /* DUALiveFramework */ = {
+			isa = PBXGroup;
+			children = (
+				D751FC2A1EC1B2BE00874515 /* Info.plist */,
+			);
+			name = DUALiveFramework;
+			path = DUALive/DUALiveFramework;
+			sourceTree = "<group>";
+		};
 		D7691A8B1EB0864B00FC4C84 = {
 			isa = PBXGroup;
 			children = (
 				D7691A961EB0864B00FC4C84 /* DUALive */,
+				D751FC281EC1B2BE00874515 /* DUALiveFramework */,
 				D7691A951EB0864B00FC4C84 /* Products */,
-				D7A917AA1EBC7F30001CB36C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		D7691A951EB0864B00FC4C84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D7691A941EB0864B00FC4C84 /* DUALive.app */,
+				D7691A941EB0864B00FC4C84 /* DUALiveDemo.app */,
+				D751FC041EC1B16600874515 /* DUALive.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +290,7 @@
 				D7691AA31EB0864C00FC4C84 /* Assets.xcassets */,
 				D7691AA51EB0864C00FC4C84 /* LaunchScreen.storyboard */,
 				D7691AA81EB0864C00FC4C84 /* Info.plist */,
+				D751FBE71EC173B800874515 /* pili-librtmp */,
 				D7691A971EB0864B00FC4C84 /* Supporting Files */,
 			);
 			path = DUALive;
@@ -156,6 +307,7 @@
 		D7691AAE1EB086FB00FC4C84 /* LiveCore */ = {
 			isa = PBXGroup;
 			children = (
+				D751FBDC1EC173A800874515 /* Push */,
 				D78E86641EC03EAA00449473 /* Configuration */,
 				D78E86511EC03E6000449473 /* Utils */,
 				D78E86291EC03D9300449473 /* Encoder */,
@@ -167,10 +319,7 @@
 		D78E86291EC03D9300449473 /* Encoder */ = {
 			isa = PBXGroup;
 			children = (
-				D78E866B1EC0412E00449473 /* H264 */,
 				D78E86331EC03D9300449473 /* LFAudioEncoding.h */,
-				D78E86341EC03D9300449473 /* LFH264VideoEncoder.h */,
-				D78E86351EC03D9300449473 /* LFH264VideoEncoder.mm */,
 				D78E86361EC03D9300449473 /* LFHardwareAudioEncoder.h */,
 				D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */,
 				D78E86381EC03D9300449473 /* LFHardwareVideoEncoder.h */,
@@ -211,40 +360,56 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
-		D78E866B1EC0412E00449473 /* H264 */ = {
-			isa = PBXGroup;
-			children = (
-				D78E866C1EC0412E00449473 /* LFAVEncoder.h */,
-				D78E866D1EC0412E00449473 /* LFAVEncoder.mm */,
-				D78E866E1EC0412E00449473 /* LFMP4Atom.h */,
-				D78E866F1EC0412E00449473 /* LFMP4Atom.m */,
-				D78E86701EC0412E00449473 /* LFNALUnit.cpp */,
-				D78E86711EC0412E00449473 /* LFNALUnit.h */,
-				D78E86721EC0412E00449473 /* LFVideoEncoder.h */,
-				D78E86731EC0412E00449473 /* LFVideoEncoder.m */,
-			);
-			path = H264;
-			sourceTree = "<group>";
-		};
-		D7A917AA1EBC7F30001CB36C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D7A917AB1EBC7F30001CB36C /* ReplayKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		D751FC011EC1B16600874515 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D751FC3E1EC1B43E00874515 /* DUALiveManager.h in Headers */,
+				D751FC2D1EC1B43E00874515 /* LFStreamingBuffer.h in Headers */,
+				D751FC2E1EC1B43E00874515 /* LFStreamRTMPSocket.h in Headers */,
+				D751FC2F1EC1B43E00874515 /* LFStreamSocket.h in Headers */,
+				D751FC301EC1B43E00874515 /* NSMutableArray+LFAdd.h in Headers */,
+				D751FC311EC1B43E00874515 /* LFLiveAudioConfiguration.h in Headers */,
+				D751FC321EC1B43E00874515 /* LFLiveVideoConfiguration.h in Headers */,
+				D751FC331EC1B43E00874515 /* DUAQueue.h in Headers */,
+				D751FC341EC1B43E00874515 /* LFAudioFrame.h in Headers */,
+				D751FC351EC1B43E00874515 /* LFFrame.h in Headers */,
+				D751FC361EC1B43E00874515 /* LFLiveDebug.h in Headers */,
+				D751FC371EC1B43E00874515 /* LFLiveStreamInfo.h in Headers */,
+				D751FC381EC1B43E00874515 /* LFVideoFrame.h in Headers */,
+				D751FC391EC1B43E00874515 /* LFAudioEncoding.h in Headers */,
+				D751FC3A1EC1B43E00874515 /* LFHardwareAudioEncoder.h in Headers */,
+				D751FC3B1EC1B43E00874515 /* LFHardwareVideoEncoder.h in Headers */,
+				D751FC3C1EC1B43E00874515 /* LFVideoEncoding.h in Headers */,
+				D751FC3D1EC1B43E00874515 /* DUAAudioCapture.h in Headers */,
+				D751FC3F1EC1B43E00874515 /* DUAVideoCapture.h in Headers */,
+				D751FC401EC1B43E00874515 /* amf.h in Headers */,
+				D751FC411EC1B43E00874515 /* bytes.h in Headers */,
+				D751FC421EC1B43E00874515 /* dh.h in Headers */,
+				D751FC431EC1B43E00874515 /* dhgroups.h in Headers */,
+				D751FC441EC1B43E00874515 /* error.h in Headers */,
+				D751FC451EC1B43E00874515 /* handshake.h in Headers */,
+				D751FC461EC1B43E00874515 /* http.h in Headers */,
+				D751FC471EC1B43E00874515 /* log.h in Headers */,
+				D751FC481EC1B43E00874515 /* rtmp.h in Headers */,
+				D751FC491EC1B43E00874515 /* rtmp_sys.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		D7691A931EB0864B00FC4C84 /* DUALive */ = {
+		D751FC031EC1B16600874515 /* DUALive */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D7691AAB1EB0864C00FC4C84 /* Build configuration list for PBXNativeTarget "DUALive" */;
+			buildConfigurationList = D751FC0D1EC1B16600874515 /* Build configuration list for PBXNativeTarget "DUALive" */;
 			buildPhases = (
-				D7691A901EB0864B00FC4C84 /* Sources */,
-				D7691A911EB0864B00FC4C84 /* Frameworks */,
-				D7691A921EB0864B00FC4C84 /* Resources */,
-				D7A917A61EBC106E001CB36C /* ShellScript */,
+				D751FBFF1EC1B16600874515 /* Sources */,
+				D751FC001EC1B16600874515 /* Frameworks */,
+				D751FC011EC1B16600874515 /* Headers */,
+				D751FC021EC1B16600874515 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -252,7 +417,27 @@
 			);
 			name = DUALive;
 			productName = DUALive;
-			productReference = D7691A941EB0864B00FC4C84 /* DUALive.app */;
+			productReference = D751FC041EC1B16600874515 /* DUALive.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D7691A931EB0864B00FC4C84 /* DUALiveDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7691AAB1EB0864C00FC4C84 /* Build configuration list for PBXNativeTarget "DUALiveDemo" */;
+			buildPhases = (
+				D7691A901EB0864B00FC4C84 /* Sources */,
+				D7691A911EB0864B00FC4C84 /* Frameworks */,
+				D7691A921EB0864B00FC4C84 /* Resources */,
+				D7A917A61EBC106E001CB36C /* ShellScript */,
+				D751FC101EC1B16600874515 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D751FC0A1EC1B16600874515 /* PBXTargetDependency */,
+			);
+			name = DUALiveDemo;
+			productName = DUALive;
+			productReference = D7691A941EB0864B00FC4C84 /* DUALiveDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -264,6 +449,11 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Mengmin Duan";
 				TargetAttributes = {
+					D751FC031EC1B16600874515 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = G7ZDN2AJQH;
+						ProvisioningStyle = Automatic;
+					};
 					D7691A931EB0864B00FC4C84 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G7ZDN2AJQH;
@@ -284,12 +474,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D7691A931EB0864B00FC4C84 /* DUALive */,
+				D7691A931EB0864B00FC4C84 /* DUALiveDemo */,
+				D751FC031EC1B16600874515 /* DUALive */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D751FC021EC1B16600874515 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D751FC2C1EC1B2BE00874515 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7691A921EB0864B00FC4C84 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -319,35 +518,76 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D751FBFF1EC1B16600874515 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D751FC111EC1B1DC00874515 /* LFStreamingBuffer.m in Sources */,
+				D751FC121EC1B1DC00874515 /* LFStreamRtmpSocket.m in Sources */,
+				D751FC131EC1B1DC00874515 /* NSMutableArray+LFAdd.m in Sources */,
+				D751FC141EC1B1DC00874515 /* LFLiveAudioConfiguration.m in Sources */,
+				D751FC151EC1B1DC00874515 /* LFLiveVideoConfiguration.m in Sources */,
+				D751FC161EC1B1DC00874515 /* DUAQueue.m in Sources */,
+				D751FC171EC1B1DC00874515 /* LFAudioFrame.m in Sources */,
+				D751FC181EC1B1DC00874515 /* LFFrame.m in Sources */,
+				D751FC191EC1B1DC00874515 /* LFLiveDebug.m in Sources */,
+				D751FC1A1EC1B1DC00874515 /* LFLiveStreamInfo.m in Sources */,
+				D751FC1B1EC1B1DC00874515 /* LFVideoFrame.m in Sources */,
+				D751FC1C1EC1B1DC00874515 /* LFHardwareAudioEncoder.m in Sources */,
+				D751FC1D1EC1B1DC00874515 /* LFHardwareVideoEncoder.m in Sources */,
+				D751FC1E1EC1B1DC00874515 /* DUAAudioCapture.m in Sources */,
+				D751FC1F1EC1B1DC00874515 /* DUALiveManager.m in Sources */,
+				D751FC201EC1B1DC00874515 /* DUAVideoCapture.m in Sources */,
+				D751FC211EC1B1DC00874515 /* amf.c in Sources */,
+				D751FC221EC1B1DC00874515 /* error.c in Sources */,
+				D751FC231EC1B1DC00874515 /* hashswf.c in Sources */,
+				D751FC241EC1B1DC00874515 /* log.c in Sources */,
+				D751FC251EC1B1DC00874515 /* parseurl.c in Sources */,
+				D751FC261EC1B1DC00874515 /* rtmp.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D7691A901EB0864B00FC4C84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D7236D031EB9CEE1005B4698 /* DUAAudioCapture.m in Sources */,
+				D751FBE61EC173A800874515 /* NSMutableArray+LFAdd.m in Sources */,
 				D78E86601EC03E6000449473 /* LFFrame.m in Sources */,
 				D78E866A1EC03EAA00449473 /* LFLiveVideoConfiguration.m in Sources */,
+				D751FBFB1EC173B800874515 /* log.c in Sources */,
 				D78E86611EC03E6000449473 /* LFLiveDebug.m in Sources */,
 				D78E865F1EC03E6000449473 /* LFAudioFrame.m in Sources */,
 				D78E86691EC03EAA00449473 /* LFLiveAudioConfiguration.m in Sources */,
 				D78E86621EC03E6000449473 /* LFLiveStreamInfo.m in Sources */,
-				D78E86741EC0412E00449473 /* LFAVEncoder.mm in Sources */,
+				D751FBE51EC173A800874515 /* LFStreamRtmpSocket.m in Sources */,
 				D7691A9F1EB0864B00FC4C84 /* ViewController.m in Sources */,
 				D7691A9C1EB0864B00FC4C84 /* AppDelegate.m in Sources */,
 				D7236D051EB9CEE1005B4698 /* DUAVideoCapture.m in Sources */,
-				D78E86761EC0412E00449473 /* LFNALUnit.cpp in Sources */,
-				D78E86751EC0412E00449473 /* LFMP4Atom.m in Sources */,
-				D78E863F1EC03D9300449473 /* LFH264VideoEncoder.mm in Sources */,
+				D751FBF91EC173B800874515 /* error.c in Sources */,
+				D751FBE41EC173A800874515 /* LFStreamingBuffer.m in Sources */,
 				D7691A991EB0864B00FC4C84 /* main.m in Sources */,
+				D751FBFD1EC173B800874515 /* rtmp.c in Sources */,
 				D78E865E1EC03E6000449473 /* DUAQueue.m in Sources */,
-				D78E86771EC0412E00449473 /* LFVideoEncoder.m in Sources */,
-				D7236D041EB9CEE1005B4698 /* DUAAVCaptureManager.m in Sources */,
+				D7236D041EB9CEE1005B4698 /* DUALiveManager.m in Sources */,
 				D78E86411EC03D9300449473 /* LFHardwareVideoEncoder.m in Sources */,
+				D751FBFC1EC173B800874515 /* parseurl.c in Sources */,
 				D78E86401EC03D9300449473 /* LFHardwareAudioEncoder.m in Sources */,
 				D78E86631EC03E6000449473 /* LFVideoFrame.m in Sources */,
+				D751FBF81EC173B800874515 /* amf.c in Sources */,
+				D751FBFA1EC173B800874515 /* hashswf.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D751FC0A1EC1B16600874515 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D751FC031EC1B16600874515 /* DUALive */;
+			targetProxy = D751FC091EC1B16600874515 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D7691AA01EB0864B00FC4C84 /* Main.storyboard */ = {
@@ -369,6 +609,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D751FC0E1EC1B16600874515 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DUALive/DUALiveFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D751FC0F1EC1B16600874515 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DUALive/DUALiveFramework/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		D7691AA91EB0864C00FC4C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -475,7 +764,7 @@
 					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libx264",
 					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libyuv",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
 				PROVISIONING_PROFILE_SPECIFIER = sdktest;
@@ -498,7 +787,7 @@
 					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libx264",
 					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libyuv",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
 				PROVISIONING_PROFILE_SPECIFIER = sdktest;
@@ -508,6 +797,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D751FC0D1EC1B16600874515 /* Build configuration list for PBXNativeTarget "DUALive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D751FC0E1EC1B16600874515 /* Debug */,
+				D751FC0F1EC1B16600874515 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D7691A8F1EB0864B00FC4C84 /* Build configuration list for PBXProject "DUALive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -517,7 +814,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D7691AAB1EB0864C00FC4C84 /* Build configuration list for PBXNativeTarget "DUALive" */ = {
+		D7691AAB1EB0864C00FC4C84 /* Build configuration list for PBXNativeTarget "DUALiveDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D7691AAC1EB0864C00FC4C84 /* Debug */,

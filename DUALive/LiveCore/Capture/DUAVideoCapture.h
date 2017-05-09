@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol DUAVideoCaptureDelegate <NSObject>
-
+@required
 - (void)videoCaptureOutput:(CVPixelBufferRef)pixcelBuffer;
 
 @end

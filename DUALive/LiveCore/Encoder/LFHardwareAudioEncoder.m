@@ -59,7 +59,7 @@
     if (![self createAudioConvert]) {
         return;
     }
-    
+  
     if(leftLength + audioData.length >= self.configuration.bufferLength){
         ///<  发送
         NSInteger totalSize = leftLength + audioData.length;
@@ -90,7 +90,7 @@
 }
 
 - (void)encodeBuffer:(char*)buf timeStamp:(uint64_t)timeStamp{
-    
+   
     AudioBuffer inBuffer;
     inBuffer.mNumberChannels = 1;
     inBuffer.mData = buf;
@@ -99,7 +99,6 @@
     AudioBufferList buffers;
     buffers.mNumberBuffers = 1;
     buffers.mBuffers[0] = inBuffer;
-    
     
     // 初始化一个输出缓冲列表
     AudioBufferList outBufferList;
@@ -123,7 +122,7 @@
     if (self.aacDeleage && [self.aacDeleage respondsToSelector:@selector(audioEncoder:audioFrame:)]) {
         [self.aacDeleage audioEncoder:self audioFrame:audioFrame];
     }
-    
+   
     if (self->enabledWriteVideoFile) {
         NSData *adts = [self adtsData:_configuration.numberOfChannels rawDataLength:audioFrame.data.length];
         fwrite(adts.bytes, 1, adts.length, self->fp);

@@ -35,7 +35,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterBackground:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
 #ifdef DEBUG
-        enabledWriteVideoFile = YES;
+        enabledWriteVideoFile = NO;
         [self initForFilePath];
 #endif
         

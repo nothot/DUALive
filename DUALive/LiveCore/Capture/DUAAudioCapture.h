@@ -11,15 +11,16 @@
 #import <AVFoundation/AVFoundation.h>
 
 @protocol DUAAudioCaptureDelegate <NSObject>
-
+@required
 - (void)audioCaptureOutput:(CMSampleBufferRef)sampleBuffer;
 
 @end
 @interface DUAAudioCapture : NSObject
 
 @property (nonatomic, weak) id<DUAAudioCaptureDelegate> delegate;
+@property (nonatomic, assign) BOOL isRunning;
 
-- (void)startAudioCapture;
-- (void)stopAudioCapture;
+//- (void)startAudioCapture;
+//- (void)stopAudioCapture;
 
 @end

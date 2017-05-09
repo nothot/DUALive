@@ -1,0 +1,216 @@
+//
+//  DUAAVCaptureManager.m
+//  DUALive
+//
+//  Created by Mengmin Duan on 2017/4/26.
+//  Copyright © 2017年 Mengmin Duan. All rights reserved.
+//
+
+#import "DUALiveManager.h"
+#import "DUAVideoCapture.h"
+#import "DUAAudioCapture.h"
+#import "LFHardwareAudioEncoder.h"
+#import "LFHardwareVideoEncoder.h"
+#import "LFStreamRTMPSocket.h"
+
+// 时间戳
+#define NOW (CACurrentMediaTime()*1000)
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+@interface DUALiveManager () <DUAVideoCaptureDelegate, DUAAudioCaptureDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate, LFStreamSocketDelegate>
+// 视频捕获
+@property (nonatomic, strong) DUAVideoCapture *videoCapture;
+// 音频捕获
+@property (nonatomic, strong) DUAAudioCapture *audioCapture;
+// 音频编码
+@property (nonatomic, strong) id<LFAudioEncoding> audioEncoder;
+// 视频编码
+@property (nonatomic, strong) id<LFVideoEncoding> videoEncoder;
+// 音频配置
+@property (nonatomic, strong) LFLiveAudioConfiguration *audioConfiguration;
+// 视频配置
+@property (nonatomic, strong) LFLiveVideoConfiguration *videoConfiguration;
+// 推流端
+@property (nonatomic, strong) id<LFStreamSocket> streamSocket;
+// 推流信息配置
+@property (nonatomic, strong) LFLiveStreamInfo *streamInfo;
+// 当前是否在推流
+@property (nonatomic, assign) BOOL pushing;
+// 时间戳锁
+@property (nonatomic, strong) dispatch_semaphore_t lock;
+// 直播状态
+@property (nonatomic, assign) LFLiveState state;
+// 相对时间戳
+@property (nonatomic, assign) uint64_t relativeTimestamps;
+// 音视频是否对齐
+@property (nonatomic, assign) BOOL avAlignment;
+// 是否捕获到音频帧
+@property (nonatomic, assign) BOOL hasAudioCapture;
+// 是否捕获到视频关键帧
+@property (nonatomic, assign) BOOL hasKeyFrameCapture;
+
+@end
+@implementation DUALiveManager
+
+- (instancetype)init
+{
+    @throw [NSException exceptionWithName:@"please call initWithVideoConfig:AudioConfig:RtmpUrl to init" reason:nil userInfo:nil];
+}
+
+- (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration rmptUrl:(NSString *)urlString
+{
+    if (self = [super init]) {
+        self.audioConfiguration = audioConfiguration;
+        self.videoConfiguration = videoConfiguration;
+        self.videoCapture = [[DUAVideoCapture alloc] init];
+        self.audioCapture = [[DUAAudioCapture alloc] init];
+        self.audioEncoder = [[LFHardwareAudioEncoder alloc] initWithAudioStreamConfiguration:audioConfiguration];
+        self.videoEncoder = [[LFHardwareVideoEncoder alloc] initWithVideoStreamConfiguration:videoConfiguration];
+        
+        self.streamInfo = [[LFLiveStreamInfo alloc] init];
+        self.streamInfo.url = urlString;
+        self.streamInfo.audioConfiguration = self.audioConfiguration;
+        self.streamInfo.videoConfiguration = self.videoConfiguration;
+        self.streamSocket = [[LFStreamRTMPSocket alloc] initWithStream:self.streamInfo reconnectInterval:0 reconnectCount:0];
+        
+        self.lock = dispatch_semaphore_create(1);
+        self.avAlignment = YES;
+        
+        self.videoCapture.delegate = self;
+        self.audioCapture.delegate = self;
+        [self.audioEncoder setDelegate:self];
+        [self.videoEncoder setDelegate:self];
+        [self.streamSocket setDelegate:self];
+    }
+    
+    return self;
+}
+
+- (void)startLive
+{
+    [self.streamSocket start];
+    
+    self.videoCapture.isRunning = YES;
+    self.audioCapture.isRunning = YES;
+    
+}
+
+- (void)stopLive
+{
+    [self.streamSocket stop];
+    self.streamSocket = nil;
+    
+    self.videoCapture.isRunning = NO;
+    self.audioCapture.isRunning = NO;
+
+}
+
+
+- (void)pushEncodedBuffer:(LFFrame *)frame
+{
+    if (self.relativeTimestamps) {
+        self.relativeTimestamps = frame.timestamp;
+    }
+    frame.timestamp = [self caculateTimestamp:frame.timestamp];
+    [self.streamSocket sendFrame:frame];
+}
+
+- (uint64_t)caculateTimestamp:(uint64_t)timestamp
+{
+    dispatch_semaphore_wait(self.lock, DISPATCH_TIME_FOREVER);
+    uint64_t newTimestamp = timestamp - self.relativeTimestamps;
+    dispatch_semaphore_signal(self.lock);
+    
+    return newTimestamp;
+}
+
+#pragma mark -- DUAVideoCaptureDelegate && DUAAudioCaptureDelegate
+
+- (void)videoCaptureOutput:(CVPixelBufferRef)pixcelBuffer
+{
+    NSLog(@"===> test video output");
+    [self.videoEncoder encodeVideoData:pixcelBuffer timeStamp:NOW];
+}
+
+- (void)audioCaptureOutput:(CMSampleBufferRef)sampleBuffer
+{
+    NSLog(@"===> test audio output");
+    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(sampleBuffer);
+    size_t length = CMBlockBufferGetDataLength(blockBufferRef);
+    Byte buffer[length];
+    CMBlockBufferCopyDataBytes(blockBufferRef, 0, length, buffer);
+    NSData *audioData = [NSData dataWithBytes:buffer length:length];
+
+    [self.audioEncoder encodeAudioData:audioData timeStamp:NOW];
+}
+
+#pragma mark -- LFAudioEncodingDelegate && LFVideoEncodingDelegate
+
+- (void)audioEncoder:(nullable id<LFAudioEncoding>)encoder audioFrame:(nullable LFAudioFrame *)frame
+{
+    NSLog(@"===> test audio encode");
+    if (self.pushing) {
+        self.hasAudioCapture = YES;
+        if (self.avAlignment) [self pushEncodedBuffer:frame];
+    }
+}
+
+- (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame
+{
+    NSLog(@"===> test video encode");
+    if (self.pushing) {
+        //self.hasKeyFrameCapture = frame.isKeyFrame;
+        self.hasKeyFrameCapture = frame.isKeyFrame && self.hasAudioCapture;
+        if (self.avAlignment) [self pushEncodedBuffer:frame];
+    }
+}
+
+#pragma mark -- LFStreamSocketDelegate
+
+- (void)socketStatus:(id<LFStreamSocket>)socket status:(LFLiveState)status
+{
+    NSLog(@"live state: %lu", (unsigned long)status);
+    if (status == LFLiveStart) {
+        if (!self.pushing) {
+            self.pushing = YES;
+            self.hasAudioCapture = NO;
+            self.hasKeyFrameCapture = NO;
+            self.avAlignment = NO;
+            self.relativeTimestamps = NO;
+        }
+    }else if (status == LFLiveStop || status == LFLiveError) {
+        self.pushing = NO;
+    }
+    self.state = status;
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveState:)]) {
+            [self.liveDelegate liveManager:self liveState:status];
+        }
+    });
+}
+
+- (void)socketDebug:(id<LFStreamSocket>)socket debugInfo:(LFLiveDebug *)debugInfo
+{
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveDebugInfo:)]) {
+            [self.liveDelegate liveManager:self liveDebugInfo:debugInfo];
+        }
+    });
+}
+
+- (void)socketDidError:(id<LFStreamSocket>)socket errorCode:(LFLiveSocketErrorCode)errorCode
+{
+    dispatch_async(dispatch_get_main_queue(), ^ {
+        if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveErrorCode:)]) {
+            [self.liveDelegate liveManager:self liveErrorCode:errorCode];
+        }
+    });
+}
+
+- (void)socketBufferStatus:(id<LFStreamSocket>)socket status:(LFLiveBuffferState)status
+{
+    
+}
+
+@end
+

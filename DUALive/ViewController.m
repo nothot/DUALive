@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "DUAAVCaptureManager.h"
+#import "DUALiveManager.h"
 
 #import <MediaPlayer/MediaPlayerDefines.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -16,7 +16,7 @@
 @interface ViewController ()
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
-@property (nonatomic, strong) DUAAVCaptureManager *avCaptureManager;
+@property (nonatomic, strong) DUALiveManager *liveManager;
 
 @end
 
@@ -61,19 +61,24 @@
     videoConfiguration.videoMinBitRate = 500*1024;
     videoConfiguration.videoFrameRate = 24;
     videoConfiguration.videoMaxKeyframeInterval = 48;
-    videoConfiguration.outputImageOrientation = UIInterfaceOrientationLandscapeLeft;
+    videoConfiguration.outputImageOrientation = UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
     videoConfiguration.autorotate = NO;
     videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
     
     LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
+    audioConfiguration.numberOfChannels = 1;
+    audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_48000Hz;
+    audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
     
-    self.avCaptureManager = [[DUAAVCaptureManager alloc] initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration rmptUrl:@""];
-    [self.avCaptureManager startLive];
+    self.liveManager = [[DUALiveManager alloc] initWithAudioConfiguration:audioConfiguration
+                                                                 videoConfiguration:videoConfiguration
+                                                                            rmptUrl:@"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153"];
+    [self.liveManager startLive];
 }
 
 - (IBAction)onStopClick:(id)sender
 {
-    [self.avCaptureManager stopLive];
+    [self.liveManager stopLive];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
