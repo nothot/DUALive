@@ -10,16 +10,18 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DUAQueue.h"
 
-static const int frameRate = 25;
+static const int frameRate = 20;
+static const int fetchFrame = 10;
 
 @interface DUAVideoCapture ()
 
-@property (nonatomic, strong) dispatch_source_t timer;
-@property (nonatomic, assign) NSInteger frameCount;
-@property (nonatomic, strong) DUAQueue *frameBufferQueue;
-@property (nonatomic, strong) dispatch_queue_t screenshotQueue;
-@property (nonatomic, strong) dispatch_queue_t fetchFrameQueue;
+@property (nonatomic, strong) dispatch_source_t timerInput;
+@property (nonatomic, strong) dispatch_source_t timerOutput;
 
+@property (nonatomic, strong) DUAQueue *framePool;
+@property (nonatomic, strong) dispatch_queue_t screenShotQueue;
+@property (nonatomic, strong) dispatch_queue_t fetchFrameQueue;
+@property (nonatomic, assign) BOOL framePoolCapabilityWarning;
 
 @end
 @implementation DUAVideoCapture
@@ -28,13 +30,20 @@ static const int frameRate = 25;
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.frameBufferQueue = [[DUAQueue alloc] init];
-        self.screenshotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
+        self.framePool = [[DUAQueue alloc] init];
+        self.screenShotQueue = dispatch_queue_create("dua.screenshot.queue", NULL);
         self.fetchFrameQueue = dispatch_queue_create("dua.fetchframe.queue", NULL);
-        self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.screenshotQueue);
-        dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-        dispatch_source_set_event_handler(self.timer, ^{
-            [self fetchScreenshot];
+    
+        self.timerInput = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.screenShotQueue);
+        dispatch_source_set_timer(self.timerInput, DISPATCH_TIME_NOW, 1.0/frameRate * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(self.timerInput, ^{
+            [self executeScreenShot];
+        });
+        
+        self.timerOutput = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.fetchFrameQueue);
+        dispatch_source_set_timer(self.timerOutput, DISPATCH_TIME_NOW, 1.0/fetchFrame * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(self.timerOutput, ^{
+            [self executeFetchFrame];
         });
     }
     
@@ -46,62 +55,76 @@ static const int frameRate = 25;
     _isRunning = isRunning;
     
     if (_isRunning) {
-        dispatch_resume(self.timer);
+        dispatch_resume(self.timerInput);
         
-        dispatch_async(self.fetchFrameQueue, ^ {
-            while (self.timer || (!self.timer && [self.frameBufferQueue deQueue])) {
-                @autoreleasepool {
-                    UIImage *object = [self.frameBufferQueue deQueue];
-                    if (object) {
-                        CGImageRef objectImage = object.CGImage;
-                        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
-                            [self.delegate videoCaptureOutput:pixcelBuffer];
-                        }
-                        CVPixelBufferRelease(pixcelBuffer);
-                    }
-                }
-            }
-        });
-        
+        dispatch_resume(self.timerOutput);
     }else {
-        dispatch_sync(self.screenshotQueue, ^{
-            dispatch_source_cancel(self.timer);
-            self.timer = nil;
+        dispatch_sync(self.screenShotQueue, ^{
+            dispatch_source_cancel(self.timerInput);
+            self.timerInput = nil;
         });
 
+        dispatch_sync(self.fetchFrameQueue, ^{
+            dispatch_source_cancel(self.timerOutput);
+            self.timerOutput = nil;
+        });
     }
 }
 
 
 #pragma mark -- private logic
-- (void)fetchScreenshot
+- (void)executeScreenShot
 {
     static int frameCount = 0;
+    //static BOOL flag = NO;
     frameCount++;
+    NSLog(@"screen shot => %d", frameCount);
     
     UIImage *image = nil;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     if (window) {
         CGSize imageSize = window.bounds.size;
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1.0);
         CGContextRef context = UIGraphicsGetCurrentContext();
         [window.layer renderInContext:context];
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
-    NSLog(@"===> fetch frame %d", frameCount);
-    [self.frameBufferQueue enQueue:image];
+    [self.framePool enQueue:image];
 
-//    UIImage *object = [self.frameQueue deQueue];
-//    if (object) {
-//        CGImageRef objectImage = image.CGImage;
-//        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-//        if (self.delegate) {
-//            [self.delegate videoCaptureOutput:pixcelBuffer];
-//        }
-//        CVPixelBufferRelease(pixcelBuffer);
+    NSLog(@"frame buffer queue count: %lu", (unsigned long)self.framePool.currentCount);
+    
+//    if (!flag) {
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//        flag = YES;
 //    }
+    
+    //[self executeFetchFrame];
+}
+
+- (void)executeFetchFrame
+{
+    @autoreleasepool {
+        if (self.framePool.currentCount >= 100 || self.framePoolCapabilityWarning) {
+            [self.framePool deQueue];
+            self.framePoolCapabilityWarning?(self.framePoolCapabilityWarning = NO):(self.framePoolCapabilityWarning = YES);
+        }
+        if (self.framePool.currentCount <= 80) {
+            self.framePoolCapabilityWarning = NO;
+        }
+        
+        if (!self.framePoolCapabilityWarning) {
+            UIImage *object = [self.framePool deQueue];
+            if (object) {
+                CGImageRef objectImage = object.CGImage;
+                CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
+                    [self.delegate videoCaptureOutput:pixcelBuffer];
+                }
+                CVPixelBufferRelease(pixcelBuffer);
+            }
+        }
+    }
 }
 
 - (CVPixelBufferRef)pixcelBufferFromCGImage:(CGImageRef)image

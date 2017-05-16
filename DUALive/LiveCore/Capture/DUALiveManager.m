@@ -88,11 +88,11 @@
 
 - (void)startLive
 {
-    [self.streamSocket start];
     
     self.videoCapture.isRunning = YES;
-    self.audioCapture.isRunning = YES;
+    //self.audioCapture.isRunning = YES;
     
+    [self.streamSocket start];
 }
 
 - (void)stopLive
@@ -101,13 +101,14 @@
     self.streamSocket = nil;
     
     self.videoCapture.isRunning = NO;
-    self.audioCapture.isRunning = NO;
+    //self.audioCapture.isRunning = NO;
 
 }
 
 
 - (void)pushEncodedBuffer:(LFFrame *)frame
 {
+    NSLog(@"push encoded buffer...");
     if (self.relativeTimestamps) {
         self.relativeTimestamps = frame.timestamp;
     }
@@ -128,40 +129,46 @@
 
 - (void)videoCaptureOutput:(CVPixelBufferRef)pixcelBuffer
 {
-    NSLog(@"===> test video output");
-    [self.videoEncoder encodeVideoData:pixcelBuffer timeStamp:NOW];
+    if (self.pushing) {
+        NSLog(@"video capture output...");
+        [self.videoEncoder encodeVideoData:pixcelBuffer timeStamp:NOW];
+    }
+    
 }
 
 - (void)audioCaptureOutput:(CMSampleBufferRef)sampleBuffer
 {
-    NSLog(@"===> test audio output");
-    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(sampleBuffer);
-    size_t length = CMBlockBufferGetDataLength(blockBufferRef);
-    Byte buffer[length];
-    CMBlockBufferCopyDataBytes(blockBufferRef, 0, length, buffer);
-    NSData *audioData = [NSData dataWithBytes:buffer length:length];
+    if (self.pushing) {
+        NSLog(@"audio capture output...");
+        CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(sampleBuffer);
+        size_t length = CMBlockBufferGetDataLength(blockBufferRef);
+        Byte buffer[length];
+        CMBlockBufferCopyDataBytes(blockBufferRef, 0, length, buffer);
+        NSData *audioData = [NSData dataWithBytes:buffer length:length];
+        
+        [self.audioEncoder encodeAudioData:audioData timeStamp:NOW];
+    }
 
-    [self.audioEncoder encodeAudioData:audioData timeStamp:NOW];
 }
 
 #pragma mark -- LFAudioEncodingDelegate && LFVideoEncodingDelegate
 
 - (void)audioEncoder:(nullable id<LFAudioEncoding>)encoder audioFrame:(nullable LFAudioFrame *)frame
 {
-    NSLog(@"===> test audio encode");
     if (self.pushing) {
+        NSLog(@"audio encoding...");
         self.hasAudioCapture = YES;
-        if (self.avAlignment) [self pushEncodedBuffer:frame];
+        /*if (self.avAlignment)*/ [self pushEncodedBuffer:frame];
     }
 }
 
 - (void)videoEncoder:(nullable id<LFVideoEncoding>)encoder videoFrame:(nullable LFVideoFrame *)frame
 {
-    NSLog(@"===> test video encode");
     if (self.pushing) {
+        NSLog(@"video encoding...");
         //self.hasKeyFrameCapture = frame.isKeyFrame;
         self.hasKeyFrameCapture = frame.isKeyFrame && self.hasAudioCapture;
-        if (self.avAlignment) [self pushEncodedBuffer:frame];
+        /*if (self.avAlignment)*/ [self pushEncodedBuffer:frame];
     }
 }
 
@@ -171,6 +178,7 @@
 {
     NSLog(@"live state: %lu", (unsigned long)status);
     if (status == LFLiveStart) {
+        
         if (!self.pushing) {
             self.pushing = YES;
             self.hasAudioCapture = NO;
@@ -191,6 +199,7 @@
 
 - (void)socketDebug:(id<LFStreamSocket>)socket debugInfo:(LFLiveDebug *)debugInfo
 {
+    NSLog(@"live debug: %@", debugInfo.description);
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveDebugInfo:)]) {
             [self.liveDelegate liveManager:self liveDebugInfo:debugInfo];
@@ -200,6 +209,7 @@
 
 - (void)socketDidError:(id<LFStreamSocket>)socket errorCode:(LFLiveSocketErrorCode)errorCode
 {
+    NSLog(@"live error: %lu", (unsigned long)errorCode);
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveErrorCode:)]) {
             [self.liveDelegate liveManager:self liveErrorCode:errorCode];

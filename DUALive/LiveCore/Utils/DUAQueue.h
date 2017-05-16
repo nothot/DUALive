@@ -10,6 +10,8 @@
 
 @interface DUAQueue : NSObject
 
+@property (nonatomic, assign) NSUInteger currentCount;
+
 - (instancetype)init;
 - (void)enQueue:(id)item;
 - (id)deQueue;

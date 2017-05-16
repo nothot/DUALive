@@ -18,8 +18,8 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        //self.queue = [[NSMutableArray alloc] init];
         self.queue = [NSMutableArray arrayWithCapacity:50];
+        self.currentCount = 0;
     }
     
     return self;
@@ -27,17 +27,14 @@
 
 - (void)enQueue:(id)item
 {
-    NSLog(@"===> in queue, count: %lu", (unsigned long)self.queue.count);
     [self.queue addObject:item];
 }
 
 - (id)deQueue
 {
     if (self.queue.count == 0) {
-        NSLog(@"===> queue is empty.");
         return nil;
     }else {
-        NSLog(@"===> out queue, count: %lu", (unsigned long)self.queue.count);
         id object = [self.queue objectAtIndex:0];
         [self.queue removeObjectAtIndex:0];
         return object;
@@ -50,6 +47,11 @@
         return NO;
     }
     return YES;
+}
+
+- (NSUInteger)queueLength
+{
+    return self.queue.count;
 }
 
 @end

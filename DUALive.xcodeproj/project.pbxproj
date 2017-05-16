@@ -19,8 +19,6 @@
 		D751FBFB1EC173B800874515 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF21EC173B800874515 /* log.c */; };
 		D751FBFC1EC173B800874515 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF41EC173B800874515 /* parseurl.c */; };
 		D751FBFD1EC173B800874515 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D751FBF51EC173B800874515 /* rtmp.c */; };
-		D751FC0B1EC1B16600874515 /* DUALive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D751FC041EC1B16600874515 /* DUALive.framework */; };
-		D751FC0C1EC1B16600874515 /* DUALive.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D751FC041EC1B16600874515 /* DUALive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D751FC111EC1B1DC00874515 /* LFStreamingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBDE1EC173A800874515 /* LFStreamingBuffer.m */; };
 		D751FC121EC1B1DC00874515 /* LFStreamRtmpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE01EC173A800874515 /* LFStreamRtmpSocket.m */; };
 		D751FC131EC1B1DC00874515 /* NSMutableArray+LFAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = D751FBE31EC173A800874515 /* NSMutableArray+LFAdd.m */; };
@@ -79,6 +77,10 @@
 		D7691AA21EB0864B00FC4C84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA01EB0864B00FC4C84 /* Main.storyboard */; };
 		D7691AA41EB0864C00FC4C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA31EB0864C00FC4C84 /* Assets.xcassets */; };
 		D7691AA71EB0864C00FC4C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA51EB0864C00FC4C84 /* LaunchScreen.storyboard */; };
+		D780301C1EC2E9ED00D9A466 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */; };
+		D780301D1EC2E9ED00D9A466 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */; };
+		D780301F1EC2EA2600D9A466 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301E1EC2EA2600D9A466 /* Bolts.framework */; };
+		D78DE38A1ECA9A7D001562B7 /* DUALog.h in Headers */ = {isa = PBXBuildFile; fileRef = D78DE3881ECA9A7D001562B7 /* DUALog.h */; };
 		D78E86401EC03D9300449473 /* LFHardwareAudioEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */; };
 		D78E86411EC03D9300449473 /* LFHardwareVideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86391EC03D9300449473 /* LFHardwareVideoEncoder.m */; };
 		D78E865E1EC03E6000449473 /* DUAQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86531EC03E6000449473 /* DUAQueue.m */; };
@@ -91,16 +93,6 @@
 		D78E866A1EC03EAA00449473 /* LFLiveVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E86681EC03EAA00449473 /* LFLiveVideoConfiguration.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D751FC091EC1B16600874515 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D7691A8C1EB0864B00FC4C84 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D751FC031EC1B16600874515;
-			remoteInfo = DUALive;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		D751FC101EC1B16600874515 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -108,7 +100,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D751FC0C1EC1B16600874515 /* DUALive.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +148,17 @@
 		D7691AA31EB0864C00FC4C84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7691AA61EB0864C00FC4C84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7691AA81EB0864C00FC4C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D780300C1EC2E8FA00D9A466 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D780300D1EC2E8FA00D9A466 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D78030101EC2E90900D9A466 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		D78030121EC2E91300D9A466 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D78030141EC2E91E00D9A466 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D78030161EC2E93100D9A466 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D78030181EC2E93A00D9A466 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D780301E1EC2EA2600D9A466 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		D78DE3881ECA9A7D001562B7 /* DUALog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DUALog.h; sourceTree = "<group>"; };
 		D78E86331EC03D9300449473 /* LFAudioEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFAudioEncoding.h; sourceTree = "<group>"; };
 		D78E86361EC03D9300449473 /* LFHardwareAudioEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFHardwareAudioEncoder.h; sourceTree = "<group>"; };
 		D78E86371EC03D9300449473 /* LFHardwareAudioEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFHardwareAudioEncoder.m; sourceTree = "<group>"; };
@@ -193,7 +195,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D751FC0B1EC1B16600874515 /* DUALive.framework in Frameworks */,
+				D780301F1EC2EA2600D9A466 /* Bolts.framework in Frameworks */,
+				D780301D1EC2E9ED00D9A466 /* FBSDKLoginKit.framework in Frameworks */,
+				D780301C1EC2E9ED00D9A466 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,9 +267,13 @@
 		D7691A8B1EB0864B00FC4C84 = {
 			isa = PBXGroup;
 			children = (
+				D780301E1EC2EA2600D9A466 /* Bolts.framework */,
+				D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */,
+				D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */,
 				D7691A961EB0864B00FC4C84 /* DUALive */,
 				D751FC281EC1B2BE00874515 /* DUALiveFramework */,
 				D7691A951EB0864B00FC4C84 /* Products */,
+				D780300B1EC2E8FA00D9A466 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,6 +324,20 @@
 			path = LiveCore;
 			sourceTree = "<group>";
 		};
+		D780300B1EC2E8FA00D9A466 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D78030181EC2E93A00D9A466 /* libstdc++.tbd */,
+				D78030161EC2E93100D9A466 /* libz.tbd */,
+				D78030141EC2E91E00D9A466 /* UIKit.framework */,
+				D78030121EC2E91300D9A466 /* AudioToolbox.framework */,
+				D78030101EC2E90900D9A466 /* VideoToolbox.framework */,
+				D780300C1EC2E8FA00D9A466 /* AVFoundation.framework */,
+				D780300D1EC2E8FA00D9A466 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D78E86291EC03D9300449473 /* Encoder */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +366,7 @@
 				D78E865B1EC03E6000449473 /* LFLiveStreamInfo.m */,
 				D78E865C1EC03E6000449473 /* LFVideoFrame.h */,
 				D78E865D1EC03E6000449473 /* LFVideoFrame.m */,
+				D78DE3881ECA9A7D001562B7 /* DUALog.h */,
 			);
 			name = Utils;
 			path = DUALive/LiveCore/Utils;
@@ -373,6 +396,7 @@
 				D751FC2F1EC1B43E00874515 /* LFStreamSocket.h in Headers */,
 				D751FC301EC1B43E00874515 /* NSMutableArray+LFAdd.h in Headers */,
 				D751FC311EC1B43E00874515 /* LFLiveAudioConfiguration.h in Headers */,
+				D78DE38A1ECA9A7D001562B7 /* DUALog.h in Headers */,
 				D751FC321EC1B43E00874515 /* LFLiveVideoConfiguration.h in Headers */,
 				D751FC331EC1B43E00874515 /* DUAQueue.h in Headers */,
 				D751FC341EC1B43E00874515 /* LFAudioFrame.h in Headers */,
@@ -433,7 +457,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D751FC0A1EC1B16600874515 /* PBXTargetDependency */,
 			);
 			name = DUALiveDemo;
 			productName = DUALive;
@@ -458,6 +481,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G7ZDN2AJQH;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -580,14 +608,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D751FC0A1EC1B16600874515 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D751FC031EC1B16600874515 /* DUALive */;
-			targetProxy = D751FC091EC1B16600874515 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D7691AA01EB0864B00FC4C84 /* Main.storyboard */ = {
@@ -755,15 +775,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G7ZDN2AJQH;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libfaac",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/librtmp",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libx264",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libyuv",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
@@ -778,15 +797,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G7ZDN2AJQH;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DUALive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libfaac",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/librtmp",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libx264",
-					"$(PROJECT_DIR)/DUALive/Clibs/3rd_lib/libyuv",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
@@ -804,6 +822,7 @@
 				D751FC0F1EC1B16600874515 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7691A8F1EB0864B00FC4C84 /* Build configuration list for PBXProject "DUALive" */ = {
 			isa = XCConfigurationList;

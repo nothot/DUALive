@@ -9,14 +9,14 @@
 #import "ViewController.h"
 #import "DUALiveManager.h"
 
-#import <MediaPlayer/MediaPlayerDefines.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface ViewController ()
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
 @property (nonatomic, strong) DUALiveManager *liveManager;
+@property (nonatomic, strong) FBSDKLoginManager *fbLoginManager;
 
 @end
 
@@ -45,25 +45,51 @@
 
 - (IBAction)onStartClick:(id)sender
 {
-//    AWVideoConfig *videoConfig = [[AWVideoConfig alloc] init];
-//    videoConfig.fps = 25;
-//    AWAudioConfig *audioConfig = [[AWAudioConfig alloc] init];
-//    audioConfig.sampleRate = 48000;
-//    
-//    //获取推流地址rtmpUrl
-//    NSString *rtmpUrl = @"rtmp://rtmp-api.facebook.com:80/rtmp/423192058058423?ds=1&s_l=1&a=AThLXHWDnrVdf9Bp";
-//    self.avCaptureManager = [[DUAAVCaptureManager alloc] initWithVideoConfig:videoConfig AudioConfig:audioConfig RtmpUrl:rtmpUrl];
+//    [self startFacebookLiveWithRTMPUrl:^(NSString *url) {
+//        NSLog(@"facebook rtmp url: %@", url);
+//        if (!url) {
+//            NSLog(@"url is null");
+//            return;
+//        }
+//        //url = @"rtmp://ossrs.net/live/123456";
+//        //url = @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
+//        
+//        LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
+//        videoConfiguration.videoSize = CGSizeMake(540, 960);
+//        videoConfiguration.videoBitRate = 800*1024;
+//        videoConfiguration.videoMaxBitRate = 1000*1024;
+//        videoConfiguration.videoMinBitRate = 500*1024;
+//        videoConfiguration.videoFrameRate = 20;
+//        videoConfiguration.videoMaxKeyframeInterval = 40;
+//        videoConfiguration.outputImageOrientation = UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
+//        videoConfiguration.autorotate = NO;
+//        //videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
+//        
+//        LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
+//        audioConfiguration.numberOfChannels = 1;
+//        audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_48000Hz;
+//        audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
+//        
+//        self.liveManager = [[DUALiveManager alloc] initWithAudioConfiguration:audioConfiguration
+//                                                           videoConfiguration:videoConfiguration
+//                                                                      rmptUrl:url
+//                            ];
+//        [self.liveManager startLive];
+//
+//    }];
+    
+    NSString *url = @"rtmp://ossrs.net/live/123456";
     
     LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
-    videoConfiguration.videoSize = CGSizeMake(360, 640);
+    videoConfiguration.videoSize = CGSizeMake(540, 960);
     videoConfiguration.videoBitRate = 800*1024;
     videoConfiguration.videoMaxBitRate = 1000*1024;
     videoConfiguration.videoMinBitRate = 500*1024;
-    videoConfiguration.videoFrameRate = 24;
-    videoConfiguration.videoMaxKeyframeInterval = 48;
+    videoConfiguration.videoFrameRate = 20;
+    videoConfiguration.videoMaxKeyframeInterval = 40;
     videoConfiguration.outputImageOrientation = UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
     videoConfiguration.autorotate = NO;
-    videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
+    //videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
     
     LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
     audioConfiguration.numberOfChannels = 1;
@@ -71,30 +97,17 @@
     audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
     
     self.liveManager = [[DUALiveManager alloc] initWithAudioConfiguration:audioConfiguration
-                                                                 videoConfiguration:videoConfiguration
-                                                                            rmptUrl:@"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153"];
+                                                       videoConfiguration:videoConfiguration
+                                                                  rmptUrl:url
+                        ];
     [self.liveManager startLive];
+
+
 }
 
 - (IBAction)onStopClick:(id)sender
 {
     [self.liveManager stopLive];
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//        NSString *writablePath = [documentsDirectory stringByAppendingPathComponent:@"IOSCamDemoX.h264"];
-//        
-//        [library writeVideoAtPathToSavedPhotosAlbum:[NSURL fileURLWithPath:writablePath]
-//                                    completionBlock:^(NSURL *assetURL, NSError *error) {
-//                                        if (error) {
-//                                            NSLog(@"Save video failed:%@",error);
-//                                        } else {
-//                                            NSLog(@"Save video succeed.");
-//                                        }
-//                                    }];
-//    });
     
 }
 
@@ -106,6 +119,53 @@
     if (i == self.colorArray.count) {
         i = 0;
     }
+}
+
+- (void)startFacebookLiveWithRTMPUrl:(void (^)(NSString *))callback
+{
+    if (!self.fbLoginManager) {
+        self.fbLoginManager = [FBSDKLoginManager new];
+    }
+    [self.fbLoginManager logOut];
+    self.fbLoginManager.loginBehavior = FBSDKLoginBehaviorNative;
+    [self.fbLoginManager logInWithPublishPermissions:@[@"publish_actions", @"manage_pages"]
+                                  fromViewController:nil
+                                             handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error) {
+        NSLog(@"facebook auth failed");
+        }else if (result.isCancelled) {
+            NSLog(@"facebook auth canceled");
+        }else {
+            FBSDKGraphRequest *UserIDRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                                                                 parameters:@{@"fields": @"id, name"}
+                                                                                 HTTPMethod:@"GET"];
+            [UserIDRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id requestResult, NSError *requestError) {
+                if (requestError) {
+                    NSLog(@"request fb user id failed");
+                }else {
+                    NSDictionary *userInfo = (NSDictionary *)requestResult;
+                    NSLog(@"facebook user info: %@", userInfo);
+                    NSString *userId = userInfo[@"id"];
+                    NSDictionary *param = @{//@"content_tags":@"12",
+                                            @"description":@"this is a live.",
+                                            @"status":@"LIVE_NOW",
+                                            //@"is_spherical":@NO,
+                                            @"title":@"live life"
+                                            };
+                    FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/live_videos", userId]
+                                                                                       parameters:param
+                                                                                       HTTPMethod:@"POST"];
+                    [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
+                        NSDictionary *streamInfo = (NSDictionary *)liveRequest;
+                        NSLog(@"facebook live info: %@", streamInfo);
+                        NSString *rtmpUrl = streamInfo[@"stream_url"];
+                        callback(rtmpUrl);
+                    }];
+                }
+            }];
+        }
+    }];
+    
 }
 
 
