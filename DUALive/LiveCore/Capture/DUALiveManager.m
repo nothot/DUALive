@@ -38,8 +38,6 @@
 @property (nonatomic, assign) BOOL pushing;
 // 时间戳锁
 @property (nonatomic, strong) dispatch_semaphore_t lock;
-// 直播状态
-@property (nonatomic, assign) LFLiveState state;
 // 相对时间戳
 @property (nonatomic, assign) uint64_t relativeTimestamps;
 // 音视频是否对齐
@@ -73,8 +71,6 @@
         self.streamInfo.videoConfiguration = self.videoConfiguration;
         self.streamSocket = [[LFStreamRTMPSocket alloc] initWithStream:self.streamInfo reconnectInterval:0 reconnectCount:0];
         
-        self.lock = dispatch_semaphore_create(1);
-        self.avAlignment = YES;
         
         self.videoCapture.delegate = self;
         self.audioCapture.delegate = self;
@@ -90,7 +86,7 @@
 {
     
     self.videoCapture.isRunning = YES;
-    //self.audioCapture.isRunning = YES;
+    self.audioCapture.isRunning = YES;
     
     [self.streamSocket start];
 }
@@ -101,7 +97,7 @@
     self.streamSocket = nil;
     
     self.videoCapture.isRunning = NO;
-    //self.audioCapture.isRunning = NO;
+    self.audioCapture.isRunning = NO;
 
 }
 
@@ -123,6 +119,22 @@
     dispatch_semaphore_signal(self.lock);
     
     return newTimestamp;
+}
+
+- (dispatch_semaphore_t)lock{
+    if(!_lock){
+        _lock = dispatch_semaphore_create(1);
+    }
+    return _lock;
+}
+
+- (BOOL)avAlignment
+{
+    if (self.hasAudioCapture && self.hasKeyFrameCapture) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark -- DUAVideoCaptureDelegate && DUAAudioCaptureDelegate
@@ -158,7 +170,8 @@
     if (self.pushing) {
         NSLog(@"audio encoding...");
         self.hasAudioCapture = YES;
-        /*if (self.avAlignment)*/ [self pushEncodedBuffer:frame];
+        if (self.avAlignment)
+            [self pushEncodedBuffer:frame];
     }
 }
 
@@ -166,9 +179,11 @@
 {
     if (self.pushing) {
         NSLog(@"video encoding...");
-        //self.hasKeyFrameCapture = frame.isKeyFrame;
-        self.hasKeyFrameCapture = frame.isKeyFrame && self.hasAudioCapture;
-        /*if (self.avAlignment)*/ [self pushEncodedBuffer:frame];
+        if (frame.isKeyFrame && self.hasAudioCapture) {
+            self.hasKeyFrameCapture = YES;
+        }
+        if (self.avAlignment)
+            [self pushEncodedBuffer:frame];
     }
 }
 
@@ -184,12 +199,12 @@
             self.hasAudioCapture = NO;
             self.hasKeyFrameCapture = NO;
             self.avAlignment = NO;
-            self.relativeTimestamps = NO;
+            self.relativeTimestamps = 0;
         }
     }else if (status == LFLiveStop || status == LFLiveError) {
         self.pushing = NO;
     }
-    self.state = status;
+
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveState:)]) {
             [self.liveDelegate liveManager:self liveState:status];

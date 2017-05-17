@@ -10,8 +10,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DUAQueue.h"
 
-static const int frameRate = 20;
-static const int fetchFrame = 10;
+static const int frameRate = 30;
+static const int fetchFrame = 20;
 
 @interface DUAVideoCapture ()
 
@@ -98,8 +98,6 @@ static const int fetchFrame = 10;
 //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 //        flag = YES;
 //    }
-    
-    //[self executeFetchFrame];
 }
 
 - (void)executeFetchFrame
