@@ -13,9 +13,7 @@
 #import "LFHardwareVideoEncoder.h"
 #import "LFStreamRTMPSocket.h"
 
-// 时间戳
 #define NOW (CACurrentMediaTime()*1000)
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 @interface DUALiveManager () <DUAVideoCaptureDelegate, DUAAudioCaptureDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate, LFStreamSocketDelegate>
 // 视频捕获
@@ -77,6 +75,7 @@
         [self.audioEncoder setDelegate:self];
         [self.videoEncoder setDelegate:self];
         [self.streamSocket setDelegate:self];
+        
     }
     
     return self;
@@ -84,7 +83,6 @@
 
 - (void)startLive
 {
-    
     self.videoCapture.isRunning = YES;
     self.audioCapture.isRunning = YES;
     
@@ -105,7 +103,7 @@
 - (void)pushEncodedBuffer:(LFFrame *)frame
 {
     NSLog(@"push encoded buffer...");
-    if (self.relativeTimestamps) {
+    if (self.relativeTimestamps == 0) {
         self.relativeTimestamps = frame.timestamp;
     }
     frame.timestamp = [self caculateTimestamp:frame.timestamp];
@@ -162,6 +160,7 @@
     }
 
 }
+
 
 #pragma mark -- LFAudioEncodingDelegate && LFVideoEncodingDelegate
 

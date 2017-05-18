@@ -19,8 +19,6 @@
 @property (nonatomic, weak) id<DUAVideoCaptureDelegate> delegate;
 @property (nonatomic, assign) BOOL isRunning;
 
-//- (void)startVideoCapture;
-//- (void)stopVideoCapture;
 
 //144P  （192×144，20帧/秒），4：3，录制一分钟大约1MB；
 //240p（320×240，20帧/秒），4：3，录制一分钟大约3MB；

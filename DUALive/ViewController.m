@@ -7,12 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "DUALiveManager.h"
-
+#import <DUALive/DUALiveManager.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController ()
+@interface ViewController () <DUALiveDelegate>
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
 @property (nonatomic, strong) DUALiveManager *liveManager;
@@ -22,11 +22,12 @@
 @end
 
 @implementation ViewController
-
+NSString *userId;
+NSString *liveVideoId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor orangeColor];
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor orangeColor],
                        [UIColor redColor],
@@ -34,7 +35,7 @@
                        [UIColor greenColor],
                        [UIColor purpleColor],
                        nil];
-    
+
 }
 
 
@@ -47,12 +48,12 @@
 - (IBAction)onStartClick:(id)sender
 {
     //self.fbrtmpUrl = @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
+    //self.fbrtmpUrl = @"rtmp://rtmp-api.facebook.com:80/rtmp/429565627421066?ds=1&s_l=1&a=ATiKorbKc6j52uSB";
     if (self.fbrtmpUrl) {
         [self startFacebookLive:self.fbrtmpUrl];
     }else
     {
         [self startFacebookLiveWithRTMPUrl:^(NSString *url) {
-            NSLog(@"facebook rtmp url: %@", url);
             [self startFacebookLive:url];
         }];
     }
@@ -64,6 +65,8 @@
         NSLog(@"url is null");
         return;
     }
+    NSLog(@"facebook rtmp url: %@", url);
+    
 
     LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
     videoConfiguration.videoSize = CGSizeMake(360, 640);
@@ -74,14 +77,13 @@
     videoConfiguration.videoMaxKeyframeInterval = 40;
     videoConfiguration.outputImageOrientation = UIInterfaceOrientationPortrait;
     videoConfiguration.autorotate = NO;
-    //videoConfiguration.sessionPreset = LFCaptureSessionPreset720x1280;
     
     LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
     audioConfiguration.numberOfChannels = 1;
-    audioConfiguration.audioSampleRate = LFLiveAudioSampleRate_48000Hz;
-    audioConfiguration.audioBitrate = LFLiveAudioBitRate_128Kbps;
+    audioConfiguration.audioSampleRate = 48000;
+    audioConfiguration.audioBitrate = 128000;
     
-    self.liveManager = [[DUALiveManager alloc] initWithAudioConfiguration:[LFLiveAudioConfiguration defaultConfiguration]
+    self.liveManager = [[DUALiveManager alloc] initWithAudioConfiguration:audioConfiguration
                                                        videoConfiguration:videoConfiguration
                                                                   rmptUrl:url
                         ];
@@ -93,6 +95,17 @@
 {
     [self.liveManager stopLive];
     
+    NSDictionary *param = @{//@"content_tags":@"12",
+                            @"end_live_video":@"true"
+                            };
+    FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@", liveVideoId]
+                                                                       parameters:param
+                                                                       HTTPMethod:@"POST"];
+    [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
+        NSDictionary *streamInfo = (NSDictionary *)liveRequest;
+        NSLog(@"facebook live result: %@", streamInfo);
+    }];
+
 }
 
 - (IBAction)onColorClick:(id)sender
@@ -112,7 +125,7 @@
     }
     [self.fbLoginManager logOut];
     self.fbLoginManager.loginBehavior = FBSDKLoginBehaviorNative;
-    [self.fbLoginManager logInWithPublishPermissions:@[@"publish_actions", @"manage_pages"]
+    [self.fbLoginManager logInWithPublishPermissions:@[@"publish_actions", @"manage_pages", @"publish_pages"]
                                   fromViewController:nil
                                              handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
@@ -129,10 +142,10 @@
                 }else {
                     NSDictionary *userInfo = (NSDictionary *)requestResult;
                     NSLog(@"facebook user info: %@", userInfo);
-                    NSString *userId = userInfo[@"id"];
-                    NSDictionary *param = @{//@"content_tags":@"12",
-                                            @"description":@"DUA is living now...",
-                                            @"title":@"live my life"
+                    userId = userInfo[@"id"];
+                    NSDictionary *param = @{
+                                            @"description":@"宇宙超级无敌巨搞笑直播",
+                                            @"title":@"Just enjoy yourself!"
                                             };
                     FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/live_videos", userId]
                                                                                        parameters:param
@@ -140,6 +153,7 @@
                     [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
                         NSDictionary *streamInfo = (NSDictionary *)liveRequest;
                         NSLog(@"facebook live info: %@", streamInfo);
+                        liveVideoId = [streamInfo objectForKey:@"id"];
                         NSString *rtmpUrl = streamInfo[@"stream_url"];
                         callback(rtmpUrl);
                         self.fbrtmpUrl = rtmpUrl;
@@ -149,6 +163,31 @@
         }
     }];
     
+}
+
+
+- (void)requestAccessForAudio {
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+    switch (status) {
+        case AVAuthorizationStatusNotDetermined: {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
+                //                if (granted) {
+                //                    dispatch_async(dispatch_get_main_queue(), ^{
+                ////                        [_self.lfSession setRunning:YES];
+                //                    });
+                //                }
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized: {
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+            break;
+        default:
+            break;
+    }
 }
 
 

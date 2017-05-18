@@ -7,14 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-CLLocationManager * locationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.

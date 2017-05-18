@@ -20,7 +20,5 @@
 @property (nonatomic, weak) id<DUAAudioCaptureDelegate> delegate;
 @property (nonatomic, assign) BOOL isRunning;
 
-//- (void)startAudioCapture;
-//- (void)stopAudioCapture;
 
 @end

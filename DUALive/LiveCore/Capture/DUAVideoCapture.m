@@ -59,6 +59,9 @@ static const int fetchFrame = 20;
         
         dispatch_resume(self.timerOutput);
     }else {
+        if (!self.timerInput && !self.timerOutput) {
+            return;
+        }
         dispatch_sync(self.screenShotQueue, ^{
             dispatch_source_cancel(self.timerInput);
             self.timerInput = nil;
