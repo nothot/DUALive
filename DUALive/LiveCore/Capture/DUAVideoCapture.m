@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "DUAQueue.h"
 
-static const int frameRate = 30;
+static const int frameRate = 20;
 static const int fetchFrame = 20;
 
 @interface DUAVideoCapture ()
@@ -57,9 +57,9 @@ static const int fetchFrame = 20;
     if (_isRunning) {
         dispatch_resume(self.timerInput);
         
-        dispatch_resume(self.timerOutput);
+        //dispatch_resume(self.timerOutput);
     }else {
-        if (!self.timerInput && !self.timerOutput) {
+        if (!self.timerInput || !self.timerOutput) {
             return;
         }
         dispatch_sync(self.screenShotQueue, ^{
@@ -67,10 +67,10 @@ static const int fetchFrame = 20;
             self.timerInput = nil;
         });
 
-        dispatch_sync(self.fetchFrameQueue, ^{
-            dispatch_source_cancel(self.timerOutput);
-            self.timerOutput = nil;
-        });
+//        dispatch_sync(self.fetchFrameQueue, ^{
+//            dispatch_source_cancel(self.timerOutput);
+//            self.timerOutput = nil;
+//        });
     }
 }
 
@@ -78,8 +78,30 @@ static const int fetchFrame = 20;
 #pragma mark -- private logic
 - (void)executeScreenShot
 {
+//    @autoreleasepool {
+//        static int frameCount = 0;
+//        //static BOOL flag = NO;
+//        frameCount++;
+//        NSLog(@"screen shot => %d", frameCount);
+//        
+//        UIImage *image = nil;
+//        UIWindow *window = [[UIApplication sharedApplication].delegate window];
+//        if (window) {
+//            CGSize imageSize = window.bounds.size;
+//            UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1.0);
+//            CGContextRef context = UIGraphicsGetCurrentContext();
+//            [window.layer renderInContext:context];
+//            image = UIGraphicsGetImageFromCurrentImageContext();
+//            UIGraphicsEndImageContext();
+//        }
+//        [self.framePool enQueue:image];
+//        
+//        NSLog(@"frame buffer queue count: %lu", (unsigned long)self.framePool.currentCount);
+//
+//    }
+    
     static int frameCount = 0;
-    //static BOOL flag = NO;
+    static BOOL flag = NO;
     frameCount++;
     NSLog(@"screen shot => %d", frameCount);
     
@@ -87,20 +109,31 @@ static const int fetchFrame = 20;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
     if (window) {
         CGSize imageSize = window.bounds.size;
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1.0);
+        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.9);
         CGContextRef context = UIGraphicsGetCurrentContext();
         [window.layer renderInContext:context];
         image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
     [self.framePool enQueue:image];
-
+    
+    //test
+                UIImage *object = [self.framePool deQueue];
+                if (object) {
+                    CGImageRef objectImage = object.CGImage;
+                    CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
+                        [self.delegate videoCaptureOutput:pixcelBuffer];
+                    }
+                    CVPixelBufferRelease(pixcelBuffer);
+                }
+    
     NSLog(@"frame buffer queue count: %lu", (unsigned long)self.framePool.currentCount);
     
-//    if (!flag) {
-//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//        flag = YES;
-//    }
+    if (!flag) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        flag = YES;
+    }
 }
 
 - (void)executeFetchFrame

@@ -76,6 +76,17 @@
 		D780301D1EC2E9ED00D9A466 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */; };
 		D780301F1EC2EA2600D9A466 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301E1EC2EA2600D9A466 /* Bolts.framework */; };
 		D7B7116F1ECD9B1A000FA5AD /* DUALive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B7116E1ECD9B1A000FA5AD /* DUALive.framework */; };
+		D7B7117B1ECEC1A5000FA5AD /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711701ECEC1A5000FA5AD /* 11.png */; };
+		D7B7117C1ECEC1A5000FA5AD /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711711ECEC1A5000FA5AD /* 12.png */; };
+		D7B7117D1ECEC1A5000FA5AD /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711721ECEC1A5000FA5AD /* 13.png */; };
+		D7B7117E1ECEC1A5000FA5AD /* 14.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711731ECEC1A5000FA5AD /* 14.png */; };
+		D7B7117F1ECEC1A5000FA5AD /* 15.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711741ECEC1A5000FA5AD /* 15.png */; };
+		D7B711801ECEC1A5000FA5AD /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711751ECEC1A5000FA5AD /* 16.png */; };
+		D7B711811ECEC1A5000FA5AD /* 17.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711761ECEC1A5000FA5AD /* 17.png */; };
+		D7B711821ECEC1A5000FA5AD /* 18.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711771ECEC1A5000FA5AD /* 18.png */; };
+		D7B711831ECEC1A5000FA5AD /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711781ECEC1A5000FA5AD /* 19.png */; };
+		D7B711841ECEC1A5000FA5AD /* 20.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B711791ECEC1A5000FA5AD /* 20.png */; };
+		D7B711851ECEC1A5000FA5AD /* 21.png in Resources */ = {isa = PBXBuildFile; fileRef = D7B7117A1ECEC1A5000FA5AD /* 21.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,6 +178,17 @@
 		D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D780301E1EC2EA2600D9A466 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D7B7116E1ECD9B1A000FA5AD /* DUALive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DUALive.framework; path = "../../Library/Developer/Xcode/DerivedData/DUALive-bwewooquhhyocicymnwcobzhczvg/Build/Products/Debug-iphoneos/DUALive.framework"; sourceTree = "<group>"; };
+		D7B711701ECEC1A5000FA5AD /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 11.png; path = ../../../Project/Temp/11.png; sourceTree = "<group>"; };
+		D7B711711ECEC1A5000FA5AD /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 12.png; path = ../../../Project/Temp/12.png; sourceTree = "<group>"; };
+		D7B711721ECEC1A5000FA5AD /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 13.png; path = ../../../Project/Temp/13.png; sourceTree = "<group>"; };
+		D7B711731ECEC1A5000FA5AD /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 14.png; path = ../../../Project/Temp/14.png; sourceTree = "<group>"; };
+		D7B711741ECEC1A5000FA5AD /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 15.png; path = ../../../Project/Temp/15.png; sourceTree = "<group>"; };
+		D7B711751ECEC1A5000FA5AD /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 16.png; path = ../../../Project/Temp/16.png; sourceTree = "<group>"; };
+		D7B711761ECEC1A5000FA5AD /* 17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 17.png; path = ../../../Project/Temp/17.png; sourceTree = "<group>"; };
+		D7B711771ECEC1A5000FA5AD /* 18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 18.png; path = ../../../Project/Temp/18.png; sourceTree = "<group>"; };
+		D7B711781ECEC1A5000FA5AD /* 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 19.png; path = ../../../Project/Temp/19.png; sourceTree = "<group>"; };
+		D7B711791ECEC1A5000FA5AD /* 20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 20.png; path = ../../../Project/Temp/20.png; sourceTree = "<group>"; };
+		D7B7117A1ECEC1A5000FA5AD /* 21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 21.png; path = ../../../Project/Temp/21.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +378,17 @@
 		D7691A971EB0864B00FC4C84 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D7B711701ECEC1A5000FA5AD /* 11.png */,
+				D7B711711ECEC1A5000FA5AD /* 12.png */,
+				D7B711721ECEC1A5000FA5AD /* 13.png */,
+				D7B711731ECEC1A5000FA5AD /* 14.png */,
+				D7B711741ECEC1A5000FA5AD /* 15.png */,
+				D7B711751ECEC1A5000FA5AD /* 16.png */,
+				D7B711761ECEC1A5000FA5AD /* 17.png */,
+				D7B711771ECEC1A5000FA5AD /* 18.png */,
+				D7B711781ECEC1A5000FA5AD /* 19.png */,
+				D7B711791ECEC1A5000FA5AD /* 20.png */,
+				D7B7117A1ECEC1A5000FA5AD /* 21.png */,
 				D7691A981EB0864B00FC4C84 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -513,9 +546,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B711841ECEC1A5000FA5AD /* 20.png in Resources */,
+				D7B7117C1ECEC1A5000FA5AD /* 12.png in Resources */,
+				D7B711821ECEC1A5000FA5AD /* 18.png in Resources */,
 				D7691AA71EB0864C00FC4C84 /* LaunchScreen.storyboard in Resources */,
+				D7B711851ECEC1A5000FA5AD /* 21.png in Resources */,
 				D7691AA41EB0864C00FC4C84 /* Assets.xcassets in Resources */,
+				D7B7117E1ECEC1A5000FA5AD /* 14.png in Resources */,
 				D7691AA21EB0864B00FC4C84 /* Main.storyboard in Resources */,
+				D7B711811ECEC1A5000FA5AD /* 17.png in Resources */,
+				D7B7117B1ECEC1A5000FA5AD /* 11.png in Resources */,
+				D7B7117D1ECEC1A5000FA5AD /* 13.png in Resources */,
+				D7B7117F1ECEC1A5000FA5AD /* 15.png in Resources */,
+				D7B711801ECEC1A5000FA5AD /* 16.png in Resources */,
+				D7B711831ECEC1A5000FA5AD /* 19.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

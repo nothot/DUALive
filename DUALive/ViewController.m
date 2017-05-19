@@ -15,6 +15,7 @@
 @interface ViewController () <DUALiveDelegate>
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
+@property (nonatomic, strong) NSMutableArray *imageArray;
 @property (nonatomic, strong) DUALiveManager *liveManager;
 @property (nonatomic, strong) FBSDKLoginManager *fbLoginManager;
 @property (nonatomic, strong) NSString *fbrtmpUrl;
@@ -27,7 +28,7 @@ NSString *liveVideoId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor orangeColor];
+//    self.view.backgroundColor = [UIColor orangeColor];
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor orangeColor],
                        [UIColor redColor],
@@ -36,6 +37,13 @@ NSString *liveVideoId;
                        [UIColor purpleColor],
                        nil];
 
+    self.imageArray = [NSMutableArray new];
+    for (int i = 11; i < 22; i++) {
+        NSString *index = [NSString stringWithFormat:@"%d.png", i];
+        UIImage *image = [UIImage imageNamed:index];
+        [self.imageArray addObject:image];
+    }
+    NSLog(@"image array: %@", self.imageArray);
 }
 
 
@@ -48,7 +56,7 @@ NSString *liveVideoId;
 - (IBAction)onStartClick:(id)sender
 {
     //self.fbrtmpUrl = @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
-    //self.fbrtmpUrl = @"rtmp://rtmp-api.facebook.com:80/rtmp/429565627421066?ds=1&s_l=1&a=ATiKorbKc6j52uSB";
+    //self.fbrtmpUrl = @"rtmp://ossrs.net/live/123456";
     if (self.fbrtmpUrl) {
         [self startFacebookLive:self.fbrtmpUrl];
     }else
@@ -69,13 +77,13 @@ NSString *liveVideoId;
     
 
     LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
-    videoConfiguration.videoSize = CGSizeMake(360, 640);
+    videoConfiguration.videoSize = CGSizeMake(640, 360);
     videoConfiguration.videoBitRate = 800*1024;
     videoConfiguration.videoMaxBitRate = 1000*1024;
     videoConfiguration.videoMinBitRate = 500*1024;
     videoConfiguration.videoFrameRate = 20;
     videoConfiguration.videoMaxKeyframeInterval = 40;
-    videoConfiguration.outputImageOrientation = UIInterfaceOrientationPortrait;
+    videoConfiguration.outputImageOrientation = UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
     videoConfiguration.autorotate = NO;
     
     LFLiveAudioConfiguration *audioConfiguration = [LFLiveAudioConfiguration new];
@@ -111,9 +119,13 @@ NSString *liveVideoId;
 - (IBAction)onColorClick:(id)sender
 {
     static int i = 0;
-    self.view.backgroundColor = (UIColor *)[self.colorArray objectAtIndex:i];
+//    self.view.backgroundColor = (UIColor *)[self.colorArray objectAtIndex:i];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [imageView setImage:[self.imageArray objectAtIndex:i]];
+    [self.view addSubview:imageView];
+    
     i++;
-    if (i == self.colorArray.count) {
+    if (i == self.imageArray.count) {
         i = 0;
     }
 }
