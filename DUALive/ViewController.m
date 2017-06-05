@@ -7,11 +7,10 @@
 //
 
 #import "ViewController.h"
-#import <DUALive/DUALiveManager.h>
+#import "DUALiveManager.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import <ReplayKit/ReplayKit.h>
 
 @interface ViewController () <DUALiveDelegate>
 
