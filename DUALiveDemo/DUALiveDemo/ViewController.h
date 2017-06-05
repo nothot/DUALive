@@ -1,14 +1,14 @@
 //
 //  ViewController.h
-//  DUALive
+//  DUALiveDemo
 //
-//  Created by Mengmin Duan on 2017/4/26.
-//  Copyright © 2017年 Mengmin Duan. All rights reserved.
+//  Created by dream on 2017/6/5.
+//  Copyright © 2017年 Duan Nothot. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController 
+@interface ViewController : UIViewController
 
 - (IBAction)onStartClick:(id)sender;
 - (IBAction)onStopClick:(id)sender;

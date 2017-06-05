@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F2F77771EE59A2700A99A41 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F77761EE59A2700A99A41 /* main.m */; };
+		6F2F777A1EE59A2700A99A41 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F77791EE59A2700A99A41 /* AppDelegate.m */; };
+		6F2F777D1EE59A2700A99A41 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F777C1EE59A2700A99A41 /* ViewController.m */; };
+		6F2F77801EE59A2700A99A41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F777E1EE59A2700A99A41 /* Main.storyboard */; };
+		6F2F77821EE59A2700A99A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F77811EE59A2700A99A41 /* Assets.xcassets */; };
+		6F2F77851EE59A2700A99A41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F77831EE59A2700A99A41 /* LaunchScreen.storyboard */; };
+		6F2F77901EE59A5C00A99A41 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F778D1EE59A5C00A99A41 /* Bolts.framework */; };
+		6F2F77911EE59A5C00A99A41 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F778E1EE59A5C00A99A41 /* FBSDKCoreKit.framework */; };
+		6F2F77921EE59A5C00A99A41 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F778F1EE59A5C00A99A41 /* FBSDKLoginKit.framework */; };
+		6F2F781C1EE59CB300A99A41 /* DUALive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F781B1EE59CB300A99A41 /* DUALive.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6F2F77721EE59A2700A99A41 /* DUALiveDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUALiveDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F2F77761EE59A2700A99A41 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6F2F77781EE59A2700A99A41 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6F2F77791EE59A2700A99A41 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6F2F777B1EE59A2700A99A41 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6F2F777C1EE59A2700A99A41 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6F2F777F1EE59A2700A99A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6F2F77811EE59A2700A99A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F2F77841EE59A2700A99A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6F2F77861EE59A2700A99A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F2F778D1EE59A5C00A99A41 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		6F2F778E1EE59A5C00A99A41 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		6F2F778F1EE59A5C00A99A41 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		6F2F781B1EE59CB300A99A41 /* DUALive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DUALive.framework; path = "../../../../Library/Developer/Xcode/DerivedData/DUALive-hgvkhuavnfhilkeifhbqurwxuznj/Build/Products/Debug-iphonesimulator/DUALive.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F2F776F1EE59A2700A99A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F2F77901EE59A5C00A99A41 /* Bolts.framework in Frameworks */,
+				6F2F77911EE59A5C00A99A41 /* FBSDKCoreKit.framework in Frameworks */,
+				6F2F77921EE59A5C00A99A41 /* FBSDKLoginKit.framework in Frameworks */,
+				6F2F781C1EE59CB300A99A41 /* DUALive.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F2F77691EE59A2700A99A41 = {
+			isa = PBXGroup;
+			children = (
+				6F2F77741EE59A2700A99A41 /* DUALiveDemo */,
+				6F2F77731EE59A2700A99A41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6F2F77731EE59A2700A99A41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F77721EE59A2700A99A41 /* DUALiveDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F2F77741EE59A2700A99A41 /* DUALiveDemo */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F778C1EE59A5C00A99A41 /* 3rdKit */,
+				6F2F77781EE59A2700A99A41 /* AppDelegate.h */,
+				6F2F77791EE59A2700A99A41 /* AppDelegate.m */,
+				6F2F777B1EE59A2700A99A41 /* ViewController.h */,
+				6F2F777C1EE59A2700A99A41 /* ViewController.m */,
+				6F2F777E1EE59A2700A99A41 /* Main.storyboard */,
+				6F2F77811EE59A2700A99A41 /* Assets.xcassets */,
+				6F2F77831EE59A2700A99A41 /* LaunchScreen.storyboard */,
+				6F2F77861EE59A2700A99A41 /* Info.plist */,
+				6F2F77751EE59A2700A99A41 /* Supporting Files */,
+			);
+			path = DUALiveDemo;
+			sourceTree = "<group>";
+		};
+		6F2F77751EE59A2700A99A41 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F781B1EE59CB300A99A41 /* DUALive.framework */,
+				6F2F77761EE59A2700A99A41 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F2F778C1EE59A5C00A99A41 /* 3rdKit */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F778D1EE59A5C00A99A41 /* Bolts.framework */,
+				6F2F778E1EE59A5C00A99A41 /* FBSDKCoreKit.framework */,
+				6F2F778F1EE59A5C00A99A41 /* FBSDKLoginKit.framework */,
+			);
+			path = 3rdKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6F2F77711EE59A2700A99A41 /* DUALiveDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F2F77891EE59A2700A99A41 /* Build configuration list for PBXNativeTarget "DUALiveDemo" */;
+			buildPhases = (
+				6F2F776E1EE59A2700A99A41 /* Sources */,
+				6F2F776F1EE59A2700A99A41 /* Frameworks */,
+				6F2F77701EE59A2700A99A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DUALiveDemo;
+			productName = DUALiveDemo;
+			productReference = 6F2F77721EE59A2700A99A41 /* DUALiveDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6F2F776A1EE59A2700A99A41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Duan Nothot";
+				TargetAttributes = {
+					6F2F77711EE59A2700A99A41 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = G7ZDN2AJQH;
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 6F2F776D1EE59A2700A99A41 /* Build configuration list for PBXProject "DUALiveDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6F2F77691EE59A2700A99A41;
+			productRefGroup = 6F2F77731EE59A2700A99A41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6F2F77711EE59A2700A99A41 /* DUALiveDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6F2F77701EE59A2700A99A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F2F77851EE59A2700A99A41 /* LaunchScreen.storyboard in Resources */,
+				6F2F77821EE59A2700A99A41 /* Assets.xcassets in Resources */,
+				6F2F77801EE59A2700A99A41 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6F2F776E1EE59A2700A99A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F2F777D1EE59A2700A99A41 /* ViewController.m in Sources */,
+				6F2F777A1EE59A2700A99A41 /* AppDelegate.m in Sources */,
+				6F2F77771EE59A2700A99A41 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6F2F777E1EE59A2700A99A41 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F2F777F1EE59A2700A99A41 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6F2F77831EE59A2700A99A41 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F2F77841EE59A2700A99A41 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6F2F77871EE59A2700A99A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6F2F77881EE59A2700A99A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6F2F778A1EE59A2700A99A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DUALiveDemo/3rdKit",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = DUALiveDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
+				PROVISIONING_PROFILE_SPECIFIER = sdktest;
+			};
+			name = Debug;
+		};
+		6F2F778B1EE59A2700A99A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DUALiveDemo/3rdKit",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = DUALiveDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
+				PROVISIONING_PROFILE_SPECIFIER = sdktest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6F2F776D1EE59A2700A99A41 /* Build configuration list for PBXProject "DUALiveDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F2F77871EE59A2700A99A41 /* Debug */,
+				6F2F77881EE59A2700A99A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F2F77891EE59A2700A99A41 /* Build configuration list for PBXNativeTarget "DUALiveDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F2F778A1EE59A2700A99A41 /* Debug */,
+				6F2F778B1EE59A2700A99A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6F2F776A1EE59A2700A99A41 /* Project object */;
+}

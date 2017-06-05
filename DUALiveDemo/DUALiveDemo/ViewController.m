@@ -1,13 +1,13 @@
 //
 //  ViewController.m
-//  DUALive
+//  DUALiveDemo
 //
-//  Created by Mengmin Duan on 2017/4/26.
-//  Copyright © 2017年 Mengmin Duan. All rights reserved.
+//  Created by dream on 2017/6/5.
+//  Copyright © 2017年 Duan Nothot. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "DUALiveManager.h"
+#import <DUALive/DUALiveManager.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <AVFoundation/AVFoundation.h>
@@ -27,7 +27,7 @@ NSString *liveVideoId;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor orangeColor];
+    //    self.view.backgroundColor = [UIColor orangeColor];
     self.colorArray = [NSMutableArray arrayWithObjects:
                        [UIColor orangeColor],
                        [UIColor redColor],
@@ -67,7 +67,7 @@ NSString *liveVideoId;
     }
     NSLog(@"facebook rtmp url: %@", url);
     
-
+    
     LFLiveVideoConfiguration *videoConfiguration = [LFLiveVideoConfiguration new];
     videoConfiguration.videoSize = CGSizeMake(640, 360);
     videoConfiguration.videoBitRate = 800*1024;
@@ -88,7 +88,7 @@ NSString *liveVideoId;
                                                                   rmptUrl:url
                         ];
     [self.liveManager startLive];
-
+    
 }
 
 - (IBAction)onStopClick:(id)sender
@@ -105,7 +105,7 @@ NSString *liveVideoId;
         NSDictionary *streamInfo = (NSDictionary *)liveRequest;
         NSLog(@"facebook live result: %@", streamInfo);
     }];
-
+    
 }
 
 - (IBAction)onColorClick:(id)sender
@@ -129,40 +129,40 @@ NSString *liveVideoId;
     [self.fbLoginManager logInWithPublishPermissions:@[@"publish_actions", @"manage_pages", @"publish_pages"]
                                   fromViewController:nil
                                              handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-        if (error) {
-        NSLog(@"facebook auth failed");
-        }else if (result.isCancelled) {
-            NSLog(@"facebook auth canceled");
-        }else {
-            FBSDKGraphRequest *UserIDRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
-                                                                                 parameters:@{@"fields": @"id, name"}
-                                                                                 HTTPMethod:@"GET"];
-            [UserIDRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id requestResult, NSError *requestError) {
-                if (requestError) {
-                    NSLog(@"request fb user id failed");
-                }else {
-                    NSDictionary *userInfo = (NSDictionary *)requestResult;
-                    NSLog(@"facebook user info: %@", userInfo);
-                    userId = userInfo[@"id"];
-                    NSDictionary *param = @{
-                                            @"description":@"宇宙超级无敌巨搞笑直播",
-                                            @"title":@"Just enjoy yourself!"
-                                            };
-                    FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/live_videos", userId]
-                                                                                       parameters:param
-                                                                                       HTTPMethod:@"POST"];
-                    [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
-                        NSDictionary *streamInfo = (NSDictionary *)liveRequest;
-                        NSLog(@"facebook live info: %@", streamInfo);
-                        liveVideoId = [streamInfo objectForKey:@"id"];
-                        NSString *rtmpUrl = streamInfo[@"stream_url"];
-                        callback(rtmpUrl);
-                        self.fbrtmpUrl = rtmpUrl;
-                    }];
-                }
-            }];
-        }
-    }];
+                                                 if (error) {
+                                                     NSLog(@"facebook auth failed");
+                                                 }else if (result.isCancelled) {
+                                                     NSLog(@"facebook auth canceled");
+                                                 }else {
+                                                     FBSDKGraphRequest *UserIDRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                                                                                                          parameters:@{@"fields": @"id, name"}
+                                                                                                                          HTTPMethod:@"GET"];
+                                                     [UserIDRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id requestResult, NSError *requestError) {
+                                                         if (requestError) {
+                                                             NSLog(@"request fb user id failed");
+                                                         }else {
+                                                             NSDictionary *userInfo = (NSDictionary *)requestResult;
+                                                             NSLog(@"facebook user info: %@", userInfo);
+                                                             userId = userInfo[@"id"];
+                                                             NSDictionary *param = @{
+                                                                                     @"description":@"宇宙超级无敌巨搞笑直播",
+                                                                                     @"title":@"Just enjoy yourself!"
+                                                                                     };
+                                                             FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/live_videos", userId]
+                                                                                                                                parameters:param
+                                                                                                                                HTTPMethod:@"POST"];
+                                                             [liveRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *liveConnection, id liveRequest, NSError *liveError) {
+                                                                 NSDictionary *streamInfo = (NSDictionary *)liveRequest;
+                                                                 NSLog(@"facebook live info: %@", streamInfo);
+                                                                 liveVideoId = [streamInfo objectForKey:@"id"];
+                                                                 NSString *rtmpUrl = streamInfo[@"stream_url"];
+                                                                 callback(rtmpUrl);
+                                                                 self.fbrtmpUrl = rtmpUrl;
+                                                             }];
+                                                         }
+                                                     }];
+                                                 }
+                                             }];
     
 }
 
@@ -188,3 +188,4 @@ NSString *liveVideoId;
 
 
 @end
+

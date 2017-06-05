@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  DUALive
+//  DUALiveDemo
 //
-//  Created by Mengmin Duan on 2017/4/26.
-//  Copyright © 2017年 Mengmin Duan. All rights reserved.
+//  Created by dream on 2017/6/5.
+//  Copyright © 2017年 Duan Nothot. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -14,9 +14,9 @@
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     return YES;
 }
 
@@ -28,7 +28,6 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    //[locationManager startUpdatingLocation];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -62,6 +61,5 @@
     [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:[options valueForKey:@"UIApplicationOpenURLOptionsSourceApplicationKey"] annotation:nil];
     return YES;
 }
-
 
 @end
