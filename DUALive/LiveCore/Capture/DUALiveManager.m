@@ -16,6 +16,8 @@
 #define NOW (CACurrentMediaTime()*1000)
 
 @interface DUALiveManager () <DUAVideoCaptureDelegate, DUAAudioCaptureDelegate, LFAudioEncodingDelegate, LFVideoEncodingDelegate, LFStreamSocketDelegate>
+// 捕获类型
+@property (nonatomic, assign) DUALiveCaptureType cType;
 // 视频捕获
 @property (nonatomic, strong) DUAVideoCapture *videoCapture;
 // 音频捕获
@@ -55,11 +57,25 @@
 
 - (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration rmptUrl:(NSString *)urlString
 {
+    return [self initWithAudioConfiguration:audioConfiguration videoConfiguration:videoConfiguration rmptUrl:urlString captureType:DUALiveDafaultAll];
+}
+
+- (instancetype)initWithAudioConfiguration:(LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(LFLiveVideoConfiguration *)videoConfiguration rmptUrl:(NSString *)urlString captureType:(DUALiveCaptureType)captureType
+{
     if (self = [super init]) {
         self.audioConfiguration = audioConfiguration;
         self.videoConfiguration = videoConfiguration;
-        self.videoCapture = [[DUAVideoCapture alloc] init];
-        self.audioCapture = [[DUAAudioCapture alloc] init];
+        self.cType = captureType;
+        
+        if (captureType & DUALiveDefaultAudio) {
+            self.audioCapture = [[DUAAudioCapture alloc] init];
+            self.audioCapture.delegate = self;
+        }
+        if (captureType & DUALiveDefaultVideo) {
+            self.videoCapture = [[DUAVideoCapture alloc] init];
+            self.videoCapture.delegate = self;
+        }
+        
         self.audioEncoder = [[LFHardwareAudioEncoder alloc] initWithAudioStreamConfiguration:audioConfiguration];
         self.videoEncoder = [[LFHardwareVideoEncoder alloc] initWithVideoStreamConfiguration:videoConfiguration];
         
@@ -69,9 +85,6 @@
         self.streamInfo.videoConfiguration = self.videoConfiguration;
         self.streamSocket = [[LFStreamRTMPSocket alloc] initWithStream:self.streamInfo reconnectInterval:0 reconnectCount:0];
         
-        
-        self.videoCapture.delegate = self;
-        self.audioCapture.delegate = self;
         [self.audioEncoder setDelegate:self];
         [self.videoEncoder setDelegate:self];
         [self.streamSocket setDelegate:self];
@@ -100,6 +113,26 @@
     });
     
 
+}
+
+- (void)pushAudioData:(NSData *)audioData
+{
+    NSLog(@"push audio from outside...");
+    if (self.cType & DUALiveInputAudio) {
+        if (self.pushing) {
+            [self.audioEncoder encodeAudioData:audioData timeStamp:NOW];
+        }
+    }
+}
+
+- (void)pushVideoData:(CVPixelBufferRef)pixelBuffer
+{
+    NSLog(@"push video from outside...");
+    if (self.cType & DUALiveInputVideo) {
+        if (self.pushing) {
+            [self.videoEncoder encodeVideoData:pixelBuffer timeStamp:NOW];
+        }
+    }
 }
 
 
@@ -209,7 +242,7 @@
 
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveState:)]) {
-            [self.liveDelegate liveManager:self liveState:status];
+            [self.liveDelegate liveManager:self liveState:(int)status];
         }
     });
 }
@@ -219,7 +252,7 @@
     NSLog(@"live debug: %@", debugInfo.description);
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveDebugInfo:)]) {
-            [self.liveDelegate liveManager:self liveDebugInfo:debugInfo];
+            [self.liveDelegate liveManager:self liveDebugInfo:[debugInfo description]];
         }
     });
 }
@@ -229,7 +262,7 @@
     NSLog(@"live error: %lu", (unsigned long)errorCode);
     dispatch_async(dispatch_get_main_queue(), ^ {
         if (self.liveDelegate && [self.liveDelegate respondsToSelector:@selector(liveManager:liveErrorCode:)]) {
-            [self.liveDelegate liveManager:self liveErrorCode:errorCode];
+            [self.liveDelegate liveManager:self liveErrorCode:(int)errorCode];
         }
     });
 }

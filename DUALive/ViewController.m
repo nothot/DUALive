@@ -11,11 +11,11 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <ReplayKit/ReplayKit.h>
 
 @interface ViewController () <DUALiveDelegate>
 
 @property (nonatomic, strong) NSMutableArray *colorArray;
-@property (nonatomic, strong) NSMutableArray *imageArray;
 @property (nonatomic, strong) DUALiveManager *liveManager;
 @property (nonatomic, strong) FBSDKLoginManager *fbLoginManager;
 @property (nonatomic, strong) NSString *fbrtmpUrl;
@@ -36,14 +36,7 @@ NSString *liveVideoId;
                        [UIColor greenColor],
                        [UIColor purpleColor],
                        nil];
-
-    self.imageArray = [NSMutableArray new];
-    for (int i = 11; i < 22; i++) {
-        NSString *index = [NSString stringWithFormat:@"%d.png", i];
-        UIImage *image = [UIImage imageNamed:index];
-        [self.imageArray addObject:image];
-    }
-    NSLog(@"image array: %@", self.imageArray);
+    [self requestAccessForAudio];
 }
 
 
@@ -55,8 +48,7 @@ NSString *liveVideoId;
 
 - (IBAction)onStartClick:(id)sender
 {
-    //self.fbrtmpUrl = @"rtmp://live.hkstv.hk.lxdns.com:1935/live/stream153";
-    //self.fbrtmpUrl = @"rtmp://ossrs.net/live/123456";
+    self.fbrtmpUrl = @"rtmp://ossrs.net/live/123456";
     if (self.fbrtmpUrl) {
         [self startFacebookLive:self.fbrtmpUrl];
     }else
@@ -65,6 +57,7 @@ NSString *liveVideoId;
             [self startFacebookLive:url];
         }];
     }
+    
 }
 
 - (void)startFacebookLive:(NSString *)url
@@ -103,7 +96,7 @@ NSString *liveVideoId;
 {
     [self.liveManager stopLive];
     
-    NSDictionary *param = @{//@"content_tags":@"12",
+    NSDictionary *param = @{
                             @"end_live_video":@"true"
                             };
     FBSDKGraphRequest *liveRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@", liveVideoId]
@@ -119,13 +112,10 @@ NSString *liveVideoId;
 - (IBAction)onColorClick:(id)sender
 {
     static int i = 0;
-//    self.view.backgroundColor = (UIColor *)[self.colorArray objectAtIndex:i];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [imageView setImage:[self.imageArray objectAtIndex:i]];
-    [self.view addSubview:imageView];
+    self.view.backgroundColor = (UIColor *)[self.colorArray objectAtIndex:i];
     
     i++;
-    if (i == self.imageArray.count) {
+    if (i == self.colorArray.count) {
         i = 0;
     }
 }
@@ -183,11 +173,6 @@ NSString *liveVideoId;
     switch (status) {
         case AVAuthorizationStatusNotDetermined: {
             [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {
-                //                if (granted) {
-                //                    dispatch_async(dispatch_get_main_queue(), ^{
-                ////                        [_self.lfSession setRunning:YES];
-                //                    });
-                //                }
             }];
             break;
         }
