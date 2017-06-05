@@ -81,6 +81,10 @@
 		6F2F775C1EE593DC00A99A41 /* LFVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2F77041EE593DC00A99A41 /* LFVideoFrame.h */; };
 		6F2F775D1EE593DC00A99A41 /* LFVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F77051EE593DC00A99A41 /* LFVideoFrame.m */; };
 		6F2F775E1EE593DC00A99A41 /* LFVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F77051EE593DC00A99A41 /* LFVideoFrame.m */; };
+		6F2F77631EE5960500A99A41 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F77601EE5960500A99A41 /* Bolts.framework */; };
+		6F2F77641EE5960500A99A41 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F77611EE5960500A99A41 /* FBSDKCoreKit.framework */; };
+		6F2F77651EE5960500A99A41 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2F77621EE5960500A99A41 /* FBSDKLoginKit.framework */; };
+		6F2F77681EE5963B00A99A41 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F77671EE5963B00A99A41 /* Info.plist */; };
 		D71833A11ECD823D00A0A306 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78030101EC2E90900D9A466 /* VideoToolbox.framework */; };
 		D71833A21ECD824400A0A306 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D78030121EC2E91300D9A466 /* AudioToolbox.framework */; };
 		D71833A31ECD824A00A0A306 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780300C1EC2E8FA00D9A466 /* AVFoundation.framework */; };
@@ -88,15 +92,11 @@
 		D71833A51ECD825800A0A306 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780300D1EC2E8FA00D9A466 /* Foundation.framework */; };
 		D71833A61ECD826A00A0A306 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D78030181EC2E93A00D9A466 /* libstdc++.tbd */; };
 		D7332BE21ECD7FA20055FF9D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7332BE11ECD7FA20055FF9D /* ViewController.m */; };
-		D751FC2C1EC1B2BE00874515 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D751FC2A1EC1B2BE00874515 /* Info.plist */; };
 		D7691A991EB0864B00FC4C84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A981EB0864B00FC4C84 /* main.m */; };
 		D7691A9C1EB0864B00FC4C84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D7691A9B1EB0864B00FC4C84 /* AppDelegate.m */; };
 		D7691AA21EB0864B00FC4C84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA01EB0864B00FC4C84 /* Main.storyboard */; };
 		D7691AA41EB0864C00FC4C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA31EB0864C00FC4C84 /* Assets.xcassets */; };
 		D7691AA71EB0864C00FC4C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7691AA51EB0864C00FC4C84 /* LaunchScreen.storyboard */; };
-		D780301C1EC2E9ED00D9A466 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */; };
-		D780301D1EC2E9ED00D9A466 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */; };
-		D780301F1EC2EA2600D9A466 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D780301E1EC2EA2600D9A466 /* Bolts.framework */; };
 		D7BBFC921EDEA5FE00C315F6 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7BBFC911EDEA5FE00C315F6 /* ReplayKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -166,9 +166,12 @@
 		6F2F77031EE593DC00A99A41 /* LFLiveStreamInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFLiveStreamInfo.m; sourceTree = "<group>"; };
 		6F2F77041EE593DC00A99A41 /* LFVideoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFVideoFrame.h; sourceTree = "<group>"; };
 		6F2F77051EE593DC00A99A41 /* LFVideoFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFVideoFrame.m; sourceTree = "<group>"; };
+		6F2F77601EE5960500A99A41 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		6F2F77611EE5960500A99A41 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		6F2F77621EE5960500A99A41 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		6F2F77671EE5963B00A99A41 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7332BE11ECD7FA20055FF9D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D751FC041EC1B16600874515 /* DUALive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DUALive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D751FC2A1EC1B2BE00874515 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7691A941EB0864B00FC4C84 /* DUALiveDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DUALiveDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7691A981EB0864B00FC4C84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D7691A9A1EB0864B00FC4C84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -185,9 +188,6 @@
 		D78030141EC2E91E00D9A466 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D78030161EC2E93100D9A466 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D78030181EC2E93A00D9A466 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
-		D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		D780301E1EC2EA2600D9A466 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D7BBFC911EDEA5FE00C315F6 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -205,14 +205,14 @@
 			files = (
 				D7BBFC921EDEA5FE00C315F6 /* ReplayKit.framework in Frameworks */,
 				D71833A61ECD826A00A0A306 /* libstdc++.tbd in Frameworks */,
+				6F2F77651EE5960500A99A41 /* FBSDKLoginKit.framework in Frameworks */,
 				D71833A51ECD825800A0A306 /* Foundation.framework in Frameworks */,
 				D71833A41ECD825000A0A306 /* UIKit.framework in Frameworks */,
 				D71833A31ECD824A00A0A306 /* AVFoundation.framework in Frameworks */,
 				D71833A21ECD824400A0A306 /* AudioToolbox.framework in Frameworks */,
 				D71833A11ECD823D00A0A306 /* VideoToolbox.framework in Frameworks */,
-				D780301F1EC2EA2600D9A466 /* Bolts.framework in Frameworks */,
-				D780301D1EC2E9ED00D9A466 /* FBSDKLoginKit.framework in Frameworks */,
-				D780301C1EC2E9ED00D9A466 /* FBSDKCoreKit.framework in Frameworks */,
+				6F2F77641EE5960500A99A41 /* FBSDKCoreKit.framework in Frameworks */,
+				6F2F77631EE5960500A99A41 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,23 +326,29 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D751FC281EC1B2BE00874515 /* DUALiveFramework */ = {
+		6F2F775F1EE5960500A99A41 /* 3rdKit */ = {
 			isa = PBXGroup;
 			children = (
-				D751FC2A1EC1B2BE00874515 /* Info.plist */,
+				6F2F77601EE5960500A99A41 /* Bolts.framework */,
+				6F2F77611EE5960500A99A41 /* FBSDKCoreKit.framework */,
+				6F2F77621EE5960500A99A41 /* FBSDKLoginKit.framework */,
 			);
-			name = DUALiveFramework;
-			path = DUALive/DUALiveFramework;
+			path = 3rdKit;
+			sourceTree = "<group>";
+		};
+		6F2F77661EE5963B00A99A41 /* DUALiveFramework */ = {
+			isa = PBXGroup;
+			children = (
+				6F2F77671EE5963B00A99A41 /* Info.plist */,
+			);
+			path = DUALiveFramework;
 			sourceTree = "<group>";
 		};
 		D7691A8B1EB0864B00FC4C84 = {
 			isa = PBXGroup;
 			children = (
-				D780301E1EC2EA2600D9A466 /* Bolts.framework */,
-				D780301A1EC2E9ED00D9A466 /* FBSDKCoreKit.framework */,
-				D780301B1EC2E9ED00D9A466 /* FBSDKLoginKit.framework */,
+				6F2F775F1EE5960500A99A41 /* 3rdKit */,
 				D7691A961EB0864B00FC4C84 /* DUALive */,
-				D751FC281EC1B2BE00874515 /* DUALiveFramework */,
 				D7691A951EB0864B00FC4C84 /* Products */,
 				D780300B1EC2E8FA00D9A466 /* Frameworks */,
 			);
@@ -369,6 +375,7 @@
 				D7691AA31EB0864C00FC4C84 /* Assets.xcassets */,
 				D7691AA51EB0864C00FC4C84 /* LaunchScreen.storyboard */,
 				D7691AA81EB0864C00FC4C84 /* Info.plist */,
+				6F2F77661EE5963B00A99A41 /* DUALiveFramework */,
 				D7691A971EB0864B00FC4C84 /* Supporting Files */,
 			);
 			path = DUALive;
@@ -488,7 +495,6 @@
 				TargetAttributes = {
 					D751FC031EC1B16600874515 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = G7ZDN2AJQH;
 						ProvisioningStyle = Automatic;
 					};
 					D7691A931EB0864B00FC4C84 = {
@@ -527,7 +533,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D751FC2C1EC1B2BE00874515 /* Info.plist in Resources */,
+				6F2F77681EE5963B00A99A41 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,11 +656,11 @@
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DUALive/DUALiveFramework/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DUALive/DUALiveFramework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -675,11 +681,11 @@
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = G7ZDN2AJQH;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DUALive/DUALiveFramework/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DUALive/DUALiveFramework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -792,6 +798,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/3rdKit",
 				);
 				INFOPLIST_FILE = DUALive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -815,6 +822,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/3rdKit",
 				);
 				INFOPLIST_FILE = DUALive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
