@@ -305,6 +305,7 @@
 				);
 				INFOPLIST_FILE = DUALiveDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";
@@ -324,6 +325,7 @@
 				);
 				INFOPLIST_FILE = DUALiveDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duan.DUALiveDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "08432b77-8fc8-4f50-8f80-83ee32ca743c";

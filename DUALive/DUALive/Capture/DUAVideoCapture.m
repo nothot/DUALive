@@ -90,26 +90,26 @@ static const int frameRate = 20;
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
 
     image = [self coreGraphicsScreenShot:window];
-//    image = [self openGLScreenShot:window];
+    //image = [self openGLScreenShot:window];
     
     if (!flag) {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         flag = YES;
     }
     
-//    [self.framePool enQueue:image];
-//    test
-//    UIImage *object = [self.framePool deQueue];
-//    if (object) {
-//        CGImageRef objectImage = object.CGImage;
-//        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
-//        if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
-//            [self.delegate videoCaptureOutput:pixcelBuffer];
-//        }
-//        CVPixelBufferRelease(pixcelBuffer);
-//    }
-//    
-//    NSLog(@"frame buffer queue count: %lu", (unsigned long)self.framePool.currentCount);
+    [self.framePool enQueue:image];
+    //test
+    UIImage *object = [self.framePool deQueue];
+    if (object) {
+        CGImageRef objectImage = object.CGImage;
+        CVPixelBufferRef pixcelBuffer = [self pixcelBufferFromCGImage:objectImage];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(videoCaptureOutput:)]) {
+            [self.delegate videoCaptureOutput:pixcelBuffer];
+        }
+        CVPixelBufferRelease(pixcelBuffer);
+    }
+    
+    NSLog(@"frame buffer queue count: %lu", (unsigned long)self.framePool.currentCount);
     
 }
 

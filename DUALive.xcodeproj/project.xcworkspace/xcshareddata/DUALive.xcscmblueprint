@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "074B013E4D98EE6C1D34060443C89291C9008CFF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F08E316797C9A82CDEF6D134F41D88D813DCE1CD" : 9223372036854775807,
+    "074B013E4D98EE6C1D34060443C89291C9008CFF" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A17B9143-090E-4B4D-8C0F-45EB25EE92F0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F08E316797C9A82CDEF6D134F41D88D813DCE1CD" : "..\/Project\/LCM",
+    "074B013E4D98EE6C1D34060443C89291C9008CFF" : "DUALive\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DUALive",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DUALive.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nothot\/DUALive.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "074B013E4D98EE6C1D34060443C89291C9008CFF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/gitlab.mbgadev.cn:8000\/cn_platform\/LCM_SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F08E316797C9A82CDEF6D134F41D88D813DCE1CD"
+    }
+  ]
+}

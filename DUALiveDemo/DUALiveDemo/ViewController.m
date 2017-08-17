@@ -47,7 +47,7 @@ NSString *liveVideoId;
 
 - (IBAction)onStartClick:(id)sender
 {
-    self.fbrtmpUrl = @"rtmp://ossrs.net/live/123456";
+//    self.fbrtmpUrl = @"rtmp://ossrs.net/live/123456";
     if (self.fbrtmpUrl) {
         [self startFacebookLive:self.fbrtmpUrl];
     }else
